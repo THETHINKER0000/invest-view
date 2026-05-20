@@ -1,0 +1,8 @@
+[
+  { "t": "TSLA", "name": "Tesla", "sec": "EV / 로봇" },
+  { "t": "PLTR", "name": "Palantir", "sec": "AI / 데이터" },
+  { "t": "RKLB", "name": "Rocket Lab", "sec": "우주 / 발사체" },
+  { "t": "IONQ", "name": "IonQ", "sec": "양자컴퓨팅" },
+  { "t": "BMNR", "name": "Bitmine", "sec": "비트코인" },
+  { "t": "JOBY", "name": "Joby Aviation", "sec": "eVTOL" }
+]

@@ -1,0 +1,71 @@
+{
+  "quarter": "2026 Q1",
+  "asOf": "2026-05-15",
+  "matrix": [
+    {
+      "id": "ark",
+      "name": "ARK Invest",
+      "firm": "Cathie Wood",
+      "rows": {
+        "TSLA": "7.6%▼",
+        "PLTR": "4.9%▼",
+        "RKLB": "3.8%▲",
+        "IONQ": "2.1%▼",
+        "BMNR": "",
+        "JOBY": "1.2%▲"
+      }
+    },
+    {
+      "id": "brk",
+      "name": "Berkshire",
+      "firm": "Warren Buffett",
+      "rows": {
+        "TSLA": "",
+        "PLTR": "",
+        "RKLB": "",
+        "IONQ": "",
+        "BMNR": "",
+        "JOBY": ""
+      }
+    },
+    {
+      "id": "coatue",
+      "name": "Coatue Mgmt",
+      "firm": "P. Laffont",
+      "rows": {
+        "TSLA": "1.4%▲",
+        "PLTR": "6.1%▲",
+        "RKLB": "",
+        "IONQ": "1.1%▲",
+        "BMNR": "",
+        "JOBY": ""
+      }
+    },
+    {
+      "id": "tiger",
+      "name": "Tiger Global",
+      "firm": "Chase Coleman",
+      "rows": {
+        "TSLA": "2.3%▼",
+        "PLTR": "3.5%▲",
+        "RKLB": "1.9%▲",
+        "IONQ": "",
+        "BMNR": "",
+        "JOBY": "0.8%▼"
+      }
+    },
+    {
+      "id": "baillie",
+      "name": "Baillie Gifford",
+      "firm": "장기 성장",
+      "rows": {
+        "TSLA": "12.1%▼",
+        "PLTR": "",
+        "RKLB": "5.6%▲",
+        "IONQ": "2.8%▲",
+        "BMNR": "",
+        "JOBY": "3.1%▲"
+      }
+    }
+  ]
+}
