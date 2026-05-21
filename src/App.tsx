@@ -8,6 +8,7 @@ import SmartMoneyMatrix from './components/SmartMoneyMatrix';
 import PortfolioModal from './components/PortfolioModal';
 import PrivateWatchlist from './components/PrivateWatchlist';
 import OutlookNotes from './components/OutlookNotes';
+import MarketPulse from './components/MarketPulse';
 import { useWatchlist } from './hooks/useWatchlist';
 import narrativesJson from '../config/narratives.json';
 import entitiesJson from '../config/entities.json';
@@ -35,7 +36,10 @@ export default function App() {
     <>
       <Header />
       <main style={{ padding: '28px', maxWidth: 1340, margin: '0 auto' }}>
-        <SectionLabel highlight="/ 기술 혁신주" first>마켓 그리드</SectionLabel>
+        <SectionLabel highlight="/ 실시간 지표" first>마켓 펄스</SectionLabel>
+        <MarketPulse />
+
+        <SectionLabel highlight="/ 기술 혁신주">마켓 그리드</SectionLabel>
         <SearchZone
           ownedTickers={ownedTickers}
           onAdd={addStock}
@@ -59,7 +63,7 @@ export default function App() {
         <SectionLabel highlight="/ 13F 기관 보유">스마트머니 트래커</SectionLabel>
         <SmartMoneyMatrix tickers={matrixTickers} onPick={setModalEntity} />
 
-        <SectionLabel highlight="/ SpaceX · xAI · 수동입력">비상장 워치리스트</SectionLabel>
+        <SectionLabel highlight="/ 유니콘 · 비공개 · 수동입력">비상장 워치리스트</SectionLabel>
         <PrivateWatchlist />
 
         <SectionLabel highlight="/ localStorage 저장">미래 전망 노트</SectionLabel>

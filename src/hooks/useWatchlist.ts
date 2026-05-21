@@ -15,6 +15,7 @@ const DUMMY_PRICES: Record<string, { price: number; chg: number }> = {
   NTRA: { price: 152.30, chg:  0.88 },
   TEM:  { price:  61.40, chg:  3.15 },
   NVDA: { price: 138.40, chg:  1.92 },
+  COIN: { price: 220.40, chg:  2.85 },
   ASTS: { price:  24.10, chg:  7.30 },
 };
 
