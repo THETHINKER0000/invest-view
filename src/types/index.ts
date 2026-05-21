@@ -8,6 +8,10 @@ export interface Ticker {
 export interface StockData extends Ticker {
   price: number;
   chg: number;
+  high?: number;
+  low?: number;
+  open?: number;
+  prevClose?: number;
   sparkData?: { v: number }[];
 }
 

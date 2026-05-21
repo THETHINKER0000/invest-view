@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { StockData } from '../types';
 import tickersJson from '../../config/tickers.json';
 import { generateSparkData } from '../lib/format';
+import { fetchQuote } from '../lib/finnhub';
 
 const DUMMY_PRICES: Record<string, { price: number; chg: number }> = {
   TSLA: { price: 248.50, chg:  2.14 },
@@ -26,9 +27,16 @@ function getPrice(t: string) {
   };
 }
 
-function buildStock(ticker: { t: string; name: string; sec: string; domain?: string }): StockData {
-  const p = getPrice(ticker.t);
-  return { ...ticker, ...p, sparkData: generateSparkData(ticker.t.charCodeAt(0)) };
+function buildStock(
+  ticker: { t: string; name: string; sec: string; domain?: string },
+  live?: { price: number; chg: number; high?: number; low?: number; open?: number; prevClose?: number },
+): StockData {
+  const p = live ?? getPrice(ticker.t);
+  return {
+    ...ticker,
+    ...p,
+    sparkData: generateSparkData(ticker.t.charCodeAt(0)),
+  };
 }
 
 const LS_ORDER = 'desk:order';
@@ -43,7 +51,7 @@ function migrateOrder(stored: string[], defaults: string[]): string[] {
   return additions.length === 0 ? stored : [...stored, ...additions];
 }
 
-export function useWatchlist() {
+export function useWatchlist(apiKey: string = '') {
   const [order, setOrder] = useState<string[]>(() => {
     try {
       const defaults = tickersJson.map((t) => t.t);
@@ -67,18 +75,59 @@ export function useWatchlist() {
     } catch { return []; }
   });
 
+  const [livePrices, setLivePrices] = useState<Record<string, { price: number; chg: number; high?: number; low?: number; open?: number; prevClose?: number }>>({});
+
   useEffect(() => { localStorage.setItem(LS_ORDER, JSON.stringify(order)); }, [order]);
   useEffect(() => { localStorage.setItem(LS_EXTRA, JSON.stringify(extra)); }, [extra]);
+
+  const orderRef = useRef(order);
+  orderRef.current = order;
 
   const allTickers = [
     ...tickersJson,
     ...extra.filter((e) => !tickersJson.find((t) => t.t === e.t)),
   ];
+  const allTickersRef = useRef(allTickers);
+  allTickersRef.current = allTickers;
+
+  useEffect(() => {
+    if (!apiKey) return;
+
+    async function pollAll() {
+      const tickers = orderRef.current;
+      const results = await Promise.allSettled(
+        tickers.map((t) => fetchQuote(t, apiKey).then((q) => ({ t, q }))),
+      );
+      const updated: typeof livePrices = {};
+      for (const r of results) {
+        if (r.status === 'fulfilled' && r.value.q) {
+          const { t, q } = r.value;
+          updated[t] = {
+            price: q.price,
+            chg: q.chg,
+            high: q.high,
+            low: q.low,
+            open: q.open,
+            prevClose: q.prevClose,
+          };
+        }
+      }
+      if (Object.keys(updated).length > 0) {
+        setLivePrices((prev) => ({ ...prev, ...updated }));
+      }
+    }
+
+    pollAll();
+    const id = setInterval(pollAll, 60_000);
+    return () => clearInterval(id);
+  }, [apiKey]);
+
+  const isLiveMode = apiKey !== '' && Object.keys(livePrices).length > 0;
 
   const stocks: StockData[] = order
     .map((t) => allTickers.find((tk) => tk.t === t))
     .filter(Boolean)
-    .map((tk) => buildStock(tk!));
+    .map((tk) => buildStock(tk!, livePrices[tk!.t]));
 
   function reorder(from: string, to: string) {
     setOrder((prev) => {
@@ -102,5 +151,5 @@ export function useWatchlist() {
     setOrder((prev) => prev.filter((x) => x !== t));
   }
 
-  return { stocks, reorder, addStock, removeStock };
+  return { stocks, reorder, addStock, removeStock, isLiveMode };
 }
