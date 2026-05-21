@@ -32,10 +32,9 @@ export default function NarrativePanel({ narrative }: Props) {
       <div
         style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.45, marginBottom: 13 }}
         dangerouslySetInnerHTML={{
-          __html: n.headline.replace(
-            /<em>/g,
-            '<em style="color:var(--white);font-style:normal;border-bottom:1px solid var(--gray-d)">'
-          ),
+          __html: n.headline
+            .replace(/<em>/g, '<em style="color:#F4F4F5;font-style:normal;border-bottom:1px solid #55555C">')
+            .replace(/<\/em>/g, '</em>'),
         }}
       />
 

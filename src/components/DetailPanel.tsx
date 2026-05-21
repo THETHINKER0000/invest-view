@@ -31,7 +31,7 @@ export default function DetailPanel({ stock, narrative }: Props) {
         marginBottom: 18, paddingBottom: 15, borderBottom: '1px solid var(--line)',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 13 }}>
-          <Chip size="l" kind="company" name={stock.name} domain={stock.domain} />
+          <Chip size="l" kind="company" name={stock.t} domain={stock.domain} />
           <h3 style={{ fontFamily: 'var(--mono)', fontSize: 17, fontWeight: 600 }}>
             {stock.t} · {stock.name}
           </h3>

@@ -81,7 +81,8 @@ export default function StockCard({ stock, active, onSelect, onRemove }: Props) 
             <div style={{ fontSize: 10, color: 'var(--gray)', marginTop: 2 }}>{stock.sec}</div>
           </div>
         </div>
-        <Chip size="m" kind="company" name={stock.name} domain={stock.domain} />
+        {/* ticker 첫 2글자를 이니셜로 — Clearbit 로드 실패 시 TS, PL 등 표시 */}
+        <Chip size="m" kind="company" name={stock.t} domain={stock.domain} />
       </div>
 
       {/* 가격 */}

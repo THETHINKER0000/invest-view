@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 type ChipSize = 's' | 'm' | 'l' | 'xl';
 type ChipKind = 'company' | 'person';
@@ -20,16 +20,20 @@ const SIZE_MAP: Record<ChipSize, { px: number; font: number; radius: number }> =
   xl: { px: 54, font: 18, radius: 9 },
 };
 
-function initials(name: string) {
-  const clean = name.replace(/[^A-Za-z가-힣 ]/g, '');
+function initials(name: string): string {
+  const clean = name.replace(/[^A-Za-z0-9가-힣 ]/g, '');
   const parts = clean.split(' ').filter(Boolean);
   if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
-  return (name.slice(0, 2)).toUpperCase();
+  return clean.slice(0, 2).toUpperCase() || name.slice(0, 2).toUpperCase();
 }
 
 export default function Chip({ size, kind, name, domain, photo, seed, round }: Props) {
   const [stage, setStage] = useState(0);
   const { px, font, radius } = SIZE_MAP[size];
+
+  // domain / photo가 바뀌면 stage 초기화
+  useEffect(() => { setStage(0); }, [domain, photo]);
+
   const borderRadius = round ? '50%' : radius;
 
   const containerStyle: React.CSSProperties = {
@@ -46,8 +50,9 @@ export default function Chip({ size, kind, name, domain, photo, seed, round }: P
   if (kind === 'company') {
     if (stage === 0 && domain) src = `https://logo.clearbit.com/${domain}`;
   } else {
-    if (stage === 0 && photo) src = photo;
-    else if (stage <= 1) {
+    if (stage === 0 && photo) {
+      src = photo;
+    } else if (stage <= 1) {
       src = `https://api.dicebear.com/9.x/notionists/svg?seed=${encodeURIComponent(seed ?? name)}&backgroundColor=18181b`;
     }
   }

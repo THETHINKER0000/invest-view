@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import searchPool from '../../config/search_pool.json';
 import entitiesJson from '../../config/entities.json';
 import type { Entity } from '../types';
@@ -15,6 +15,19 @@ interface Props {
 export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props) {
   const [mode, setMode] = useState<'stock' | 'entity'>('stock');
   const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // click-outside → 드롭다운 닫기
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   const stockMatches = query.trim() && mode === 'stock'
     ? searchPool.filter(
@@ -32,7 +45,13 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
       )
     : [];
 
-  const hasResults = stockMatches.length > 0 || entityMatches.length > 0;
+  const hasResults = open && (stockMatches.length > 0 || entityMatches.length > 0);
+
+  function switchMode(m: 'stock' | 'entity') {
+    setMode(m);
+    setQuery('');
+    setOpen(false);
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginBottom: 16 }}>
@@ -41,7 +60,7 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
         {(['stock', 'entity'] as const).map((m, i) => (
           <button
             key={m}
-            onClick={() => { setMode(m); setQuery(''); }}
+            onClick={() => switchMode(m)}
             style={{
               background: mode === m ? 'var(--white)' : 'var(--bg-1)',
               border: '1px solid ' + (mode === m ? 'var(--white)' : 'var(--line)'),
@@ -56,12 +75,13 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
         ))}
       </div>
 
-      {/* 입력 */}
-      <div style={{ position: 'relative' }}>
-        <span style={{ position: 'absolute', left: 13, top: 11, color: 'var(--gray-d)', fontSize: 15 }}>⌕</span>
+      {/* 입력 + 드롭다운 */}
+      <div ref={containerRef} style={{ position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 13, top: 11, color: 'var(--gray-d)', fontSize: 15, pointerEvents: 'none' }}>⌕</span>
         <input
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
           placeholder={
             mode === 'stock'
               ? '기술주 검색해서 추가 — 티커 또는 기업명 (예: NVDA, Tempus)'
@@ -72,8 +92,8 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
             borderRadius: 7, color: 'var(--white)', fontFamily: 'var(--mono)', fontSize: 13,
             padding: '11px 14px 11px 36px', letterSpacing: '.02em', outline: 'none',
           }}
-          onFocus={(e) => (e.target.style.borderColor = 'var(--line-2)')}
-          onBlur={(e) => (e.target.style.borderColor = 'var(--line)')}
+          onMouseDown={(e) => { (e.target as HTMLInputElement).style.borderColor = 'var(--line-2)'; }}
+          onBlur={(e) => { (e.target as HTMLInputElement).style.borderColor = 'var(--line)'; }}
         />
 
         {hasResults && (
@@ -87,7 +107,8 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
             {stockMatches.map((p) => (
               <div
                 key={p.t}
-                onClick={() => { onAdd(p); setQuery(''); }}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => { onAdd(p); setQuery(''); setOpen(false); }}
                 style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '11px 14px', cursor: 'pointer', borderBottom: '1px solid var(--line)',
@@ -111,7 +132,8 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
             {entityMatches.map((en) => (
               <div
                 key={en.id}
-                onClick={() => { onOpenEntity(en); setQuery(''); }}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => { onOpenEntity(en); setQuery(''); setOpen(false); }}
                 style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '11px 14px', cursor: 'pointer', borderBottom: '1px solid var(--line)',
