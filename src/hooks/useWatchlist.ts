@@ -33,12 +33,30 @@ function buildStock(ticker: { t: string; name: string; sec: string; domain?: str
 
 const LS_ORDER = 'desk:order';
 const LS_EXTRA = 'desk:extra';
+const LS_VERSION = 'desk:version';
+const VERSION = '2';
+
+/** Merge new default tickers into a stored order, appending any missing ones. */
+function migrateOrder(stored: string[], defaults: string[]): string[] {
+  const set = new Set(stored);
+  const additions = defaults.filter((t) => !set.has(t));
+  return additions.length === 0 ? stored : [...stored, ...additions];
+}
 
 export function useWatchlist() {
   const [order, setOrder] = useState<string[]>(() => {
     try {
+      const defaults = tickersJson.map((t) => t.t);
       const s = localStorage.getItem(LS_ORDER);
-      return s ? JSON.parse(s) : tickersJson.map((t) => t.t);
+      if (!s) return defaults;
+      const stored = JSON.parse(s) as string[];
+      // On version bump, merge in any new defaults (NVDA, COIN, etc.)
+      if (localStorage.getItem(LS_VERSION) !== VERSION) {
+        const merged = migrateOrder(stored, defaults);
+        localStorage.setItem(LS_VERSION, VERSION);
+        return merged;
+      }
+      return stored;
     } catch { return tickersJson.map((t) => t.t); }
   });
 

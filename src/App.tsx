@@ -35,7 +35,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <main style={{ padding: '28px', maxWidth: 1340, margin: '0 auto' }}>
+      <main className="main" style={{ padding: '28px', maxWidth: 1340, margin: '0 auto' }}>
         <SectionLabel highlight="/ 실시간 지표" first>마켓 펄스</SectionLabel>
         <MarketPulse />
 

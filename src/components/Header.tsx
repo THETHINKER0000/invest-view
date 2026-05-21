@@ -23,9 +23,9 @@ export default function Header() {
       position: 'sticky', top: 0, zIndex: 30,
     }}>
       {/* 상단: 로고 + 시각 */}
-      <div style={{
+      <div className="hdr-top" style={{
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        padding: '13px 28px', borderBottom: '1px solid var(--line)',
+        padding: '13px 28px', borderBottom: '1px solid var(--line)', gap: 10,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
           {/* 라이브 펄스 */}
@@ -77,10 +77,18 @@ export default function Header() {
             </span>
           </div>
         ))}
-        <div style={{ marginLeft: 'auto', fontSize: 9, color: 'var(--gray-d)', fontFamily: 'var(--mono)', letterSpacing: '.06em', paddingLeft: 18, whiteSpace: 'nowrap' }}>
+        <div className="hdr-disclaim" style={{ marginLeft: 'auto', fontSize: 9, color: 'var(--gray-d)', fontFamily: 'var(--mono)', letterSpacing: '.06em', paddingLeft: 18, whiteSpace: 'nowrap' }}>
           ◆ 참고용 · 투자 권유 아님
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 720px) {
+          .hdr-top h1 { font-size: 12px !important; letter-spacing: .18em !important; }
+          .hdr-top { padding: 11px 16px !important; }
+          .hdr-disclaim { display: none; }
+        }
+      `}</style>
     </header>
   );
 }
