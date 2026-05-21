@@ -6,6 +6,7 @@
       "id": "ark",
       "name": "ARK Invest",
       "firm": "Cathie Wood",
+      "domain": "ark-funds.com",
       "rows": {
         "TSLA": "7.6%▼",
         "PLTR": "4.9%▼",
@@ -19,6 +20,7 @@
       "id": "brk",
       "name": "Berkshire",
       "firm": "Warren Buffett",
+      "domain": "berkshirehathaway.com",
       "rows": {
         "TSLA": "",
         "PLTR": "",
@@ -32,6 +34,7 @@
       "id": "coatue",
       "name": "Coatue Mgmt",
       "firm": "P. Laffont",
+      "domain": "coatue.com",
       "rows": {
         "TSLA": "1.4%▲",
         "PLTR": "6.1%▲",
@@ -45,6 +48,7 @@
       "id": "tiger",
       "name": "Tiger Global",
       "firm": "Chase Coleman",
+      "domain": "tigerglobal.com",
       "rows": {
         "TSLA": "2.3%▼",
         "PLTR": "3.5%▲",
@@ -58,6 +62,7 @@
       "id": "baillie",
       "name": "Baillie Gifford",
       "firm": "장기 성장",
+      "domain": "bailliegifford.com",
       "rows": {
         "TSLA": "12.1%▼",
         "PLTR": "",

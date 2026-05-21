@@ -11,9 +11,13 @@
   --white: #F4F4F5;
   --gray: #8A8A92;
   --gray-d: #55555C;
-  --up: #FFFFFF;
-  --down: #5E5E66;
-  --signal: #6CA0FF;
+  /* 등락 색상 — 한국식(상승=빨강 / 하락=파랑)
+     미국식으로 뒤집으려면 --up 과 --down 값만 서로 교체 */
+  --up: #F0473E;
+  --up-dim: rgba(240,71,62,.15);
+  --down: #3E8BF0;
+  --down-dim: rgba(62,139,240,.15);
+  --signal: #9A9AA2;   /* 보조 액센트 — 무채색 (빨강/파랑과 충돌 방지) */
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'IBM Plex Sans', sans-serif;
 }

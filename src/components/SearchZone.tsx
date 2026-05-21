@@ -2,14 +2,15 @@ import { useState } from 'react';
 import searchPool from '../../config/search_pool.json';
 import entitiesJson from '../../config/entities.json';
 import type { Entity } from '../types';
+import Chip from './Chip';
+
+const entities = entitiesJson as Entity[];
 
 interface Props {
   ownedTickers: Set<string>;
-  onAdd: (ticker: { t: string; name: string; sec: string }) => void;
+  onAdd: (ticker: { t: string; name: string; sec: string; domain?: string }) => void;
   onOpenEntity: (entity: Entity) => void;
 }
-
-const entities = entitiesJson as Entity[];
 
 export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props) {
   const [mode, setMode] = useState<'stock' | 'entity'>('stock');
@@ -55,7 +56,7 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
         ))}
       </div>
 
-      {/* 검색 입력 */}
+      {/* 입력 */}
       <div style={{ position: 'relative' }}>
         <span style={{ position: 'absolute', left: 13, top: 11, color: 'var(--gray-d)', fontSize: 15 }}>⌕</span>
         <input
@@ -75,7 +76,6 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
           onBlur={(e) => (e.target.style.borderColor = 'var(--line)')}
         />
 
-        {/* 결과 드롭다운 */}
         {hasResults && (
           <div style={{
             position: 'absolute', top: 46, left: 0, right: 0,
@@ -95,18 +95,13 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
                 className="result-row"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-                  <div style={{
-                    width: 26, height: 26, borderRadius: 5, flexShrink: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 11,
-                    background: 'var(--bg)', border: '1px solid var(--line-2)', color: 'var(--white)',
-                  }}>{p.t.slice(0, 2)}</div>
+                  <Chip size="s" kind="company" name={p.name} domain={p.domain} />
                   <div>
                     <div style={{ fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 13 }}>{p.t}</div>
                     <div style={{ fontSize: 11, color: 'var(--gray)', marginTop: 1 }}>{p.name} · {p.sec}</div>
                   </div>
                 </div>
-                <span style={{ fontSize: 10, color: 'var(--signal)', fontFamily: 'var(--mono)', letterSpacing: '.06em' }}>
+                <span style={{ fontSize: 10, color: 'var(--white)', fontFamily: 'var(--mono)', letterSpacing: '.06em' }}>
                   + 그리드에 추가
                 </span>
               </div>
@@ -124,19 +119,22 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
                 className="result-row"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-                  <div style={{
-                    width: 26, height: 26, borderRadius: 5, flexShrink: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 11,
-                    background: 'var(--bg)', border: '1px solid var(--line-2)', color: 'var(--white)',
-                  }}>{en.name.slice(0, 2).toUpperCase()}</div>
+                  <Chip
+                    size="s"
+                    kind={en.kind === 'FUND' ? 'company' : 'person'}
+                    name={en.name}
+                    domain={en.domain}
+                    photo={en.photo}
+                    seed={en.name}
+                    round={en.kind === 'PERSON'}
+                  />
                   <div>
                     <div style={{ fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 13 }}>{en.name}</div>
                     <div style={{ fontSize: 11, color: 'var(--gray)', marginTop: 1 }}>{en.role}</div>
                   </div>
                 </div>
                 <span style={{
-                  fontSize: 9, color: 'var(--gray-d)', fontFamily: 'var(--mono)',
+                  fontSize: 9, color: 'var(--gray)', fontFamily: 'var(--mono)',
                   border: '1px solid var(--line)', padding: '2px 6px', borderRadius: 3, letterSpacing: '.08em',
                 }}>{en.kind}</span>
               </div>

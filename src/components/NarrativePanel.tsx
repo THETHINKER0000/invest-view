@@ -21,32 +21,56 @@ export default function NarrativePanel({ narrative }: Props) {
       background: 'var(--bg)', border: '1px solid var(--line)',
       borderLeft: '2px solid var(--signal)', borderRadius: 7, padding: 17,
     }}>
-      <div style={{ fontSize: 9, letterSpacing: '.2em', color: 'var(--signal)', fontWeight: 600, textTransform: 'uppercase', marginBottom: 11, fontFamily: 'var(--mono)' }}>
+      <div style={{
+        fontSize: 9, letterSpacing: '.2em', color: 'var(--gray)',
+        fontWeight: 600, textTransform: 'uppercase', marginBottom: 11, fontFamily: 'var(--mono)',
+      }}>
         서사 / NARRATIVE
       </div>
+
+      {/* 헤드라인: em은 화이트 + 언더라인 */}
       <div
         style={{ fontSize: 16, fontWeight: 600, lineHeight: 1.45, marginBottom: 13 }}
-        dangerouslySetInnerHTML={{ __html: n.headline.replace(/<em>/g, '<em style="color:var(--signal);font-style:normal">') }}
+        dangerouslySetInnerHTML={{
+          __html: n.headline.replace(
+            /<em>/g,
+            '<em style="color:var(--white);font-style:normal;border-bottom:1px solid var(--gray-d)">'
+          ),
+        }}
       />
 
       <div style={{ marginTop: 13 }}>
-        <div style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gray)', marginBottom: 5, letterSpacing: '.06em' }}>◆ 핵심 서사</div>
+        <div style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gray)', marginBottom: 5, letterSpacing: '.06em' }}>
+          ◆ 핵심 서사
+        </div>
         <p style={{ fontSize: 12.5, color: 'var(--white)', lineHeight: 1.65 }}>{n.core}</p>
       </div>
 
       <div style={{ marginTop: 13 }}>
-        <div style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gray)', marginBottom: 5, letterSpacing: '.06em' }}>→ 다음 방향성</div>
+        <div style={{ fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gray)', marginBottom: 5, letterSpacing: '.06em' }}>
+          → 다음 방향성
+        </div>
         <p style={{ fontSize: 12.5, color: 'var(--white)', lineHeight: 1.65 }}>{n.direction}</p>
       </div>
 
-      {/* 강세/약세 */}
+      {/* 강세/약세 — 상승/하락 틴트 배경 */}
       <div style={{ display: 'flex', gap: 9, marginTop: 12 }}>
-        <div style={{ flex: 1, background: 'var(--bg-2)', border: '1px solid var(--line)', borderRadius: 6, padding: '9px 11px' }}>
-          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--white)' }}>▲ 강세 서사</div>
+        <div style={{
+          flex: 1, background: 'var(--up-dim)', border: '1px solid rgba(240,71,62,.3)',
+          borderRadius: 6, padding: '9px 11px',
+        }}>
+          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--up)' }}>
+            ▲ 강세 서사
+          </div>
           <p style={{ fontSize: 11.5, color: 'var(--gray)', lineHeight: 1.55 }}>{n.bull}</p>
         </div>
-        <div style={{ flex: 1, background: 'var(--bg-2)', border: '1px solid var(--line)', borderRadius: 6, padding: '9px 11px' }}>
-          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--gray)' }}>▼ 약세 서사</div>
+        <div style={{
+          flex: 1, background: 'var(--down-dim)', border: '1px solid rgba(62,139,240,.3)',
+          borderRadius: 6, padding: '9px 11px',
+        }}>
+          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--down)' }}>
+            ▼ 약세 서사
+          </div>
           <p style={{ fontSize: 11.5, color: 'var(--gray)', lineHeight: 1.55 }}>{n.bear}</p>
         </div>
       </div>

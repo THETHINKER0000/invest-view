@@ -3,118 +3,135 @@
     "id": "ark",
     "name": "ARK Invest",
     "kind": "FUND",
+    "domain": "ark-funds.com",
+    "photo": null,
     "role": "Cathie Wood · 운용사",
     "aum": "$16.8B",
     "positions": 165,
     "src": "13F",
     "holdings": [
-      { "t": "TSLA", "name": "Tesla",        "pct": 7.6, "amt": "$1.28B",  "chg": "-5.6%" },
-      { "t": "COIN", "name": "Coinbase",      "pct": 6.2, "amt": "$1.04B",  "chg": "+2.1%" },
-      { "t": "ROKU", "name": "Roku",          "pct": 5.8, "amt": "$974M",   "chg": "-3.4%" },
-      { "t": "PLTR", "name": "Palantir",      "pct": 4.9, "amt": "$823M",   "chg": "-1.8%" },
-      { "t": "CRSP", "name": "CRISPR Tx",     "pct": 4.4, "amt": "$739M",   "chg": "+8.0%" },
-      { "t": "RKLB", "name": "Rocket Lab",    "pct": 3.8, "amt": "$638M",   "chg": "+6.1%" },
-      { "t": "기타", "name": "기타 159종목",  "pct": 67.3, "amt": "$11.3B", "chg": "" }
+      { "t": "TSLA", "name": "Tesla",       "domain": "tesla.com",          "pct": 7.6,  "amt": "$1.28B", "chg": "-5.6%" },
+      { "t": "COIN", "name": "Coinbase",    "domain": "coinbase.com",       "pct": 6.2,  "amt": "$1.04B", "chg": "+2.1%" },
+      { "t": "ROKU", "name": "Roku",        "domain": "roku.com",           "pct": 5.8,  "amt": "$974M",  "chg": "-3.4%" },
+      { "t": "PLTR", "name": "Palantir",    "domain": "palantir.com",       "pct": 4.9,  "amt": "$823M",  "chg": "-1.8%" },
+      { "t": "CRSP", "name": "CRISPR Tx",   "domain": "crisprtx.com",       "pct": 4.4,  "amt": "$739M",  "chg": "+8.0%" },
+      { "t": "RKLB", "name": "Rocket Lab",  "domain": "rocketlabusa.com",   "pct": 3.8,  "amt": "$638M",  "chg": "+6.1%" },
+      { "t": "기타", "name": "기타 159종목",                                   "pct": 67.3, "amt": "$11.3B", "chg": "" }
     ]
   },
   {
     "id": "brk",
     "name": "Berkshire Hathaway",
     "kind": "FUND",
+    "domain": "berkshirehathaway.com",
+    "photo": null,
     "role": "Warren Buffett · 지주사",
     "aum": "$302B",
     "positions": 42,
     "src": "13F",
     "holdings": [
-      { "t": "AAPL", "name": "Apple",           "pct": 24.1, "amt": "$72.8B", "chg": "-2.0%" },
-      { "t": "AXP",  "name": "American Express", "pct": 15.6, "amt": "$47.1B", "chg": "━" },
-      { "t": "BAC",  "name": "Bank of America",  "pct": 11.2, "amt": "$33.8B", "chg": "-4.1%" },
-      { "t": "KO",   "name": "Coca-Cola",        "pct": 9.8,  "amt": "$29.6B", "chg": "━" },
-      { "t": "CVX",  "name": "Chevron",          "pct": 6.4,  "amt": "$19.3B", "chg": "+1.2%" },
-      { "t": "기타", "name": "기타 37종목",      "pct": 32.9, "amt": "$99.4B", "chg": "" }
+      { "t": "AAPL", "name": "Apple",           "domain": "apple.com",           "pct": 24.1, "amt": "$72.8B", "chg": "-2.0%" },
+      { "t": "AXP",  "name": "American Express", "domain": "americanexpress.com", "pct": 15.6, "amt": "$47.1B", "chg": "" },
+      { "t": "BAC",  "name": "Bank of America",  "domain": "bankofamerica.com",   "pct": 11.2, "amt": "$33.8B", "chg": "-4.1%" },
+      { "t": "KO",   "name": "Coca-Cola",        "domain": "coca-cola.com",       "pct": 9.8,  "amt": "$29.6B", "chg": "" },
+      { "t": "CVX",  "name": "Chevron",          "domain": "chevron.com",         "pct": 6.4,  "amt": "$19.3B", "chg": "+1.2%" },
+      { "t": "기타", "name": "기타 37종목",                                         "pct": 32.9, "amt": "$99.4B", "chg": "" }
     ]
   },
   {
     "id": "coatue",
     "name": "Coatue Management",
     "kind": "FUND",
+    "domain": "coatue.com",
+    "photo": null,
     "role": "Philippe Laffont · 헤지펀드",
     "aum": "$24.1B",
     "positions": 78,
     "src": "13F",
     "holdings": [
-      { "t": "NVDA", "name": "NVIDIA",     "pct": 11.4, "amt": "$2.75B",  "chg": "+3.2%" },
-      { "t": "META", "name": "Meta",       "pct": 8.9,  "amt": "$2.14B",  "chg": "+1.0%" },
-      { "t": "PLTR", "name": "Palantir",   "pct": 6.1,  "amt": "$1.47B",  "chg": "+4.5%" },
-      { "t": "TEM",  "name": "Tempus AI",  "pct": 4.7,  "amt": "$1.13B",  "chg": "+12%" },
-      { "t": "기타", "name": "기타 74종목","pct": 68.9, "amt": "$16.6B",  "chg": "" }
+      { "t": "NVDA", "name": "NVIDIA",    "domain": "nvidia.com",  "pct": 11.4, "amt": "$2.75B", "chg": "+3.2%" },
+      { "t": "META", "name": "Meta",      "domain": "meta.com",    "pct": 8.9,  "amt": "$2.14B", "chg": "+1.0%" },
+      { "t": "PLTR", "name": "Palantir",  "domain": "palantir.com","pct": 6.1,  "amt": "$1.47B", "chg": "+4.5%" },
+      { "t": "TEM",  "name": "Tempus AI", "domain": "tempus.com",  "pct": 4.7,  "amt": "$1.13B", "chg": "+12%" },
+      { "t": "기타", "name": "기타 74종목",                          "pct": 68.9, "amt": "$16.6B", "chg": "" }
     ]
   },
   {
     "id": "tiger",
     "name": "Tiger Global",
     "kind": "FUND",
+    "domain": "tigerglobal.com",
+    "photo": null,
     "role": "Chase Coleman · 헤지펀드",
     "aum": "$18.4B",
     "positions": 54,
     "src": "13F",
     "holdings": [
-      { "t": "MSFT", "name": "Microsoft", "pct": 9.2,  "amt": "$1.69B",  "chg": "+2.1%" },
-      { "t": "NVDA", "name": "NVIDIA",    "pct": 8.7,  "amt": "$1.60B",  "chg": "+5.3%" },
-      { "t": "META", "name": "Meta",      "pct": 7.4,  "amt": "$1.36B",  "chg": "+1.8%" },
-      { "t": "기타", "name": "기타 51종목","pct": 74.7, "amt": "$13.75B", "chg": "" }
+      { "t": "MSFT", "name": "Microsoft", "domain": "microsoft.com","pct": 9.2,  "amt": "$1.69B",  "chg": "+2.1%" },
+      { "t": "NVDA", "name": "NVIDIA",    "domain": "nvidia.com",   "pct": 8.7,  "amt": "$1.60B",  "chg": "+5.3%" },
+      { "t": "META", "name": "Meta",      "domain": "meta.com",     "pct": 7.4,  "amt": "$1.36B",  "chg": "+1.8%" },
+      { "t": "기타", "name": "기타 51종목",                            "pct": 74.7, "amt": "$13.75B", "chg": "" }
     ]
   },
   {
     "id": "baillie",
     "name": "Baillie Gifford",
     "kind": "FUND",
+    "domain": "bailliegifford.com",
+    "photo": null,
     "role": "스코틀랜드 장기 성장 운용사",
     "aum": "$21.3B",
     "positions": 89,
     "src": "13F",
     "holdings": [
-      { "t": "TSLA", "name": "Tesla",      "pct": 12.1, "amt": "$2.58B",  "chg": "-3.2%" },
-      { "t": "AMZN", "name": "Amazon",     "pct": 8.4,  "amt": "$1.79B",  "chg": "+1.1%" },
-      { "t": "RKLB", "name": "Rocket Lab", "pct": 5.6,  "amt": "$1.19B",  "chg": "+9.4%" },
-      { "t": "기타", "name": "기타 86종목","pct": 73.9, "amt": "$15.74B", "chg": "" }
+      { "t": "TSLA", "name": "Tesla",      "domain": "tesla.com",         "pct": 12.1, "amt": "$2.58B",  "chg": "-3.2%" },
+      { "t": "AMZN", "name": "Amazon",     "domain": "amazon.com",        "pct": 8.4,  "amt": "$1.79B",  "chg": "+1.1%" },
+      { "t": "RKLB", "name": "Rocket Lab", "domain": "rocketlabusa.com",  "pct": 5.6,  "amt": "$1.19B",  "chg": "+9.4%" },
+      { "t": "기타", "name": "기타 86종목",                                  "pct": 73.9, "amt": "$15.74B", "chg": "" }
     ]
   },
   {
     "id": "musk",
     "name": "Elon Musk",
     "kind": "PERSON",
+    "domain": null,
+    "photo": null,
     "role": "개인 · Tesla / SpaceX / xAI",
     "aum": "공시 지분 기준",
     "positions": "주요 3",
     "src": "FORM4 / 13D",
     "holdings": [
-      { "t": "TSLA",  "name": "Tesla (보통주+옵션)",     "pct": 60.0, "amt": "~$140B",   "chg": "13D" },
-      { "t": "SPACE", "name": "SpaceX (비상장)",          "pct": 30.0, "amt": "추정 $100B+", "chg": "비상장" },
-      { "t": "XAI",   "name": "xAI (비상장)",             "pct": 10.0, "amt": "비공개",   "chg": "비상장" }
+      { "t": "TSLA",  "name": "Tesla (보통주+옵션)", "domain": "tesla.com",  "pct": 60.0, "amt": "~$140B",      "chg": "13D" },
+      { "t": "SPACE", "name": "SpaceX (비상장)",      "domain": "spacex.com", "pct": 30.0, "amt": "추정 $100B+", "chg": "비상장" },
+      { "t": "XAI",   "name": "xAI (비상장)",                                 "pct": 10.0, "amt": "비공개",       "chg": "비상장" }
     ]
   },
   {
     "id": "thiel",
     "name": "Peter Thiel",
     "kind": "PERSON",
+    "domain": null,
+    "photo": null,
     "role": "개인 · Founders Fund / Palantir 공동창업",
     "aum": "공시 지분 기준",
     "positions": "주요 다수",
     "src": "FORM4 / 13D",
     "holdings": [
-      { "t": "PLTR", "name": "Palantir (공동창업 지분)",              "pct": 55.0, "amt": "공시 기준 대규모", "chg": "Form4" },
-      { "t": "기타", "name": "Founders Fund 포트폴리오 (비상장 다수)", "pct": 45.0, "amt": "비공개",          "chg": "비상장" }
+      { "t": "PLTR", "name": "Palantir (공동창업 지분)",              "domain": "palantir.com", "pct": 55.0, "amt": "대규모", "chg": "Form4" },
+      { "t": "기타", "name": "Founders Fund 포트폴리오 (비상장 다수)",                            "pct": 45.0, "amt": "비공개", "chg": "비상장" }
     ]
   },
   {
     "id": "wood",
     "name": "Cathie Wood",
     "kind": "PERSON",
+    "domain": null,
+    "photo": null,
     "role": "개인 · ARK Invest CEO/CIO",
-    "aum": "ARK 운용 → 펀드 참조",
+    "aum": "ARK 운용 참조",
     "positions": "—",
     "src": "13F (ARK)",
+    "redirect": "ark",
     "holdings": [
       { "t": "NOTE", "name": "개인 자산이 아닌 ARK 운용 포트폴리오를 참조하세요", "pct": 100, "amt": "→ ARK Invest", "chg": "" }
     ]

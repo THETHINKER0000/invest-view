@@ -10,9 +10,11 @@ import PrivateWatchlist from './components/PrivateWatchlist';
 import OutlookNotes from './components/OutlookNotes';
 import { useWatchlist } from './hooks/useWatchlist';
 import narrativesJson from '../config/narratives.json';
+import entitiesJson from '../config/entities.json';
 import type { Entity, Narrative } from './types';
 
 const narratives = narrativesJson as Record<string, Narrative>;
+const entities = entitiesJson as Entity[];
 
 export default function App() {
   const { stocks, reorder, addStock, removeStock } = useWatchlist();
@@ -23,6 +25,11 @@ export default function App() {
   const narrative = selectedStock ? (narratives[selectedStock.t] ?? null) : null;
   const ownedTickers = new Set(stocks.map((s) => s.t));
   const matrixTickers = stocks.map((s) => s.t).slice(0, 8);
+
+  function handleJump(id: string) {
+    const found = entities.find((e) => e.id === id);
+    if (found) setModalEntity(found);
+  }
 
   return (
     <>
@@ -65,10 +72,14 @@ export default function App() {
         fontFamily: 'var(--mono)', lineHeight: 1.8, letterSpacing: '.03em',
       }}>
         INNOVATOR&rsquo;S DESK — 개인 참고용 대시보드. 투자 권유가 아니며 데이터 정확성을 보장하지 않습니다.<br />
-        데이터 출처: FINNHUB · SEC EDGAR (13F / FORM 4 / 13D-G) · COINGECKO
+        데이터 출처: FINNHUB · SEC EDGAR (13F / FORM 4 / 13D-G) · COINGECKO · 로고 CLEARBIT · 아바타 DICEBEAR
       </footer>
 
-      <PortfolioModal entity={modalEntity} onClose={() => setModalEntity(null)} />
+      <PortfolioModal
+        entity={modalEntity}
+        onClose={() => setModalEntity(null)}
+        onJump={handleJump}
+      />
     </>
   );
 }
