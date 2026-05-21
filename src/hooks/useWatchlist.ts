@@ -4,41 +4,63 @@ import tickersJson from '../../config/tickers.json';
 import { generateSparkData } from '../lib/format';
 
 const DUMMY_PRICES: Record<string, { price: number; chg: number }> = {
-  TSLA: { price: 248.50, chg: 2.14 },
-  PLTR: { price: 97.80,  chg: 4.62 },
-  RKLB: { price: 28.34,  chg: -1.88 },
-  IONQ: { price: 42.10,  chg: 6.71 },
-  BMNR: { price: 54.20,  chg: -3.42 },
-  JOBY: { price: 9.85,   chg: 1.03 },
-  ABCL: { price: 4.62,   chg: -0.64 },
-  HIMS: { price: 38.90,  chg: 5.27 },
-  NTRA: { price: 152.30, chg: 0.88 },
-  TEM:  { price: 61.40,  chg: 3.15 },
-  NVDA: { price: 138.40, chg: 1.92 },
-  ASTS: { price: 24.10,  chg: 7.30 },
+  TSLA: { price: 248.50, chg:  2.14 },
+  PLTR: { price:  97.80, chg:  4.62 },
+  RKLB: { price:  28.34, chg: -1.88 },
+  IONQ: { price:  42.10, chg:  6.71 },
+  BMNR: { price:  54.20, chg: -3.42 },
+  JOBY: { price:   9.85, chg:  1.03 },
+  ABCL: { price:   4.62, chg: -0.64 },
+  HIMS: { price:  38.90, chg:  5.27 },
+  NTRA: { price: 152.30, chg:  0.88 },
+  TEM:  { price:  61.40, chg:  3.15 },
+  NVDA: { price: 138.40, chg:  1.92 },
+  COIN: { price: 220.40, chg:  2.85 },
+  ASTS: { price:  24.10, chg:  7.30 },
 };
 
 function getPrice(t: string) {
-  return DUMMY_PRICES[t] ?? { price: Math.random() * 100 + 10, chg: (Math.random() - 0.5) * 10 };
+  return DUMMY_PRICES[t] ?? {
+    price: parseFloat((Math.random() * 100 + 10).toFixed(2)),
+    chg: parseFloat(((Math.random() - 0.5) * 10).toFixed(2)),
+  };
 }
 
-function buildStock(ticker: { t: string; name: string; sec: string }): StockData {
+function buildStock(ticker: { t: string; name: string; sec: string; domain?: string }): StockData {
   const p = getPrice(ticker.t);
   return { ...ticker, ...p, sparkData: generateSparkData(ticker.t.charCodeAt(0)) };
 }
 
 const LS_ORDER = 'desk:order';
 const LS_EXTRA = 'desk:extra';
+const LS_VERSION = 'desk:version';
+const VERSION = '2';
+
+/** Merge new default tickers into a stored order, appending any missing ones. */
+function migrateOrder(stored: string[], defaults: string[]): string[] {
+  const set = new Set(stored);
+  const additions = defaults.filter((t) => !set.has(t));
+  return additions.length === 0 ? stored : [...stored, ...additions];
+}
 
 export function useWatchlist() {
   const [order, setOrder] = useState<string[]>(() => {
     try {
+      const defaults = tickersJson.map((t) => t.t);
       const s = localStorage.getItem(LS_ORDER);
-      return s ? JSON.parse(s) : tickersJson.map((t) => t.t);
+      if (!s) return defaults;
+      const stored = JSON.parse(s) as string[];
+      // On version bump, merge in any new defaults (NVDA, COIN, etc.)
+      if (localStorage.getItem(LS_VERSION) !== VERSION) {
+        const merged = migrateOrder(stored, defaults);
+        localStorage.setItem(LS_VERSION, VERSION);
+        return merged;
+      }
+      return stored;
     } catch { return tickersJson.map((t) => t.t); }
   });
 
-  const [extra, setExtra] = useState<{ t: string; name: string; sec: string }[]>(() => {
+  const [extra, setExtra] = useState<{ t: string; name: string; sec: string; domain?: string }[]>(() => {
     try {
       const s = localStorage.getItem(LS_EXTRA);
       return s ? JSON.parse(s) : [];
@@ -70,7 +92,7 @@ export function useWatchlist() {
     });
   }
 
-  function addStock(ticker: { t: string; name: string; sec: string }) {
+  function addStock(ticker: { t: string; name: string; sec: string; domain?: string }) {
     if (order.includes(ticker.t)) return;
     setExtra((prev) => [...prev, ticker]);
     setOrder((prev) => [...prev, ticker.t]);

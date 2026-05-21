@@ -1,19 +1,33 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import searchPool from '../../config/search_pool.json';
 import entitiesJson from '../../config/entities.json';
 import type { Entity } from '../types';
+import Chip from './Chip';
+
+const entities = entitiesJson as Entity[];
 
 interface Props {
   ownedTickers: Set<string>;
-  onAdd: (ticker: { t: string; name: string; sec: string }) => void;
+  onAdd: (ticker: { t: string; name: string; sec: string; domain?: string }) => void;
   onOpenEntity: (entity: Entity) => void;
 }
-
-const entities = entitiesJson as Entity[];
 
 export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props) {
   const [mode, setMode] = useState<'stock' | 'entity'>('stock');
   const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // click-outside → 드롭다운 닫기
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
 
   const stockMatches = query.trim() && mode === 'stock'
     ? searchPool.filter(
@@ -31,7 +45,13 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
       )
     : [];
 
-  const hasResults = stockMatches.length > 0 || entityMatches.length > 0;
+  const hasResults = open && (stockMatches.length > 0 || entityMatches.length > 0);
+
+  function switchMode(m: 'stock' | 'entity') {
+    setMode(m);
+    setQuery('');
+    setOpen(false);
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 9, marginBottom: 16 }}>
@@ -40,7 +60,7 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
         {(['stock', 'entity'] as const).map((m, i) => (
           <button
             key={m}
-            onClick={() => { setMode(m); setQuery(''); }}
+            onClick={() => switchMode(m)}
             style={{
               background: mode === m ? 'var(--white)' : 'var(--bg-1)',
               border: '1px solid ' + (mode === m ? 'var(--white)' : 'var(--line)'),
@@ -55,12 +75,13 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
         ))}
       </div>
 
-      {/* 검색 입력 */}
-      <div style={{ position: 'relative' }}>
-        <span style={{ position: 'absolute', left: 13, top: 11, color: 'var(--gray-d)', fontSize: 15 }}>⌕</span>
+      {/* 입력 + 드롭다운 */}
+      <div ref={containerRef} style={{ position: 'relative' }}>
+        <span style={{ position: 'absolute', left: 13, top: 11, color: 'var(--gray-d)', fontSize: 15, pointerEvents: 'none' }}>⌕</span>
         <input
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
           placeholder={
             mode === 'stock'
               ? '기술주 검색해서 추가 — 티커 또는 기업명 (예: NVDA, Tempus)'
@@ -71,11 +92,10 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
             borderRadius: 7, color: 'var(--white)', fontFamily: 'var(--mono)', fontSize: 13,
             padding: '11px 14px 11px 36px', letterSpacing: '.02em', outline: 'none',
           }}
-          onFocus={(e) => (e.target.style.borderColor = 'var(--line-2)')}
-          onBlur={(e) => (e.target.style.borderColor = 'var(--line)')}
+          onMouseDown={(e) => { (e.target as HTMLInputElement).style.borderColor = 'var(--line-2)'; }}
+          onBlur={(e) => { (e.target as HTMLInputElement).style.borderColor = 'var(--line)'; }}
         />
 
-        {/* 결과 드롭다운 */}
         {hasResults && (
           <div style={{
             position: 'absolute', top: 46, left: 0, right: 0,
@@ -87,7 +107,8 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
             {stockMatches.map((p) => (
               <div
                 key={p.t}
-                onClick={() => { onAdd(p); setQuery(''); }}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => { onAdd(p); setQuery(''); setOpen(false); }}
                 style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '11px 14px', cursor: 'pointer', borderBottom: '1px solid var(--line)',
@@ -95,12 +116,7 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
                 className="result-row"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-                  <div style={{
-                    width: 26, height: 26, borderRadius: 5, flexShrink: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 11,
-                    background: 'var(--bg)', border: '1px solid var(--line-2)', color: 'var(--white)',
-                  }}>{p.t.slice(0, 2)}</div>
+                  <Chip size="s" kind="company" name={p.name} domain={p.domain} />
                   <div>
                     <div style={{ fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 13 }}>{p.t}</div>
                     <div style={{ fontSize: 11, color: 'var(--gray)', marginTop: 1 }}>{p.name} · {p.sec}</div>
@@ -116,7 +132,8 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
             {entityMatches.map((en) => (
               <div
                 key={en.id}
-                onClick={() => { onOpenEntity(en); setQuery(''); }}
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => { onOpenEntity(en); setQuery(''); setOpen(false); }}
                 style={{
                   display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                   padding: '11px 14px', cursor: 'pointer', borderBottom: '1px solid var(--line)',
@@ -124,19 +141,22 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
                 className="result-row"
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 11 }}>
-                  <div style={{
-                    width: 26, height: 26, borderRadius: 5, flexShrink: 0,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 11,
-                    background: 'var(--bg)', border: '1px solid var(--line-2)', color: 'var(--white)',
-                  }}>{en.name.slice(0, 2).toUpperCase()}</div>
+                  <Chip
+                    size="s"
+                    kind={en.kind === 'FUND' ? 'company' : 'person'}
+                    name={en.name}
+                    domain={en.domain}
+                    photo={en.photo}
+                    seed={en.name}
+                    round={en.kind === 'PERSON'}
+                  />
                   <div>
                     <div style={{ fontFamily: 'var(--mono)', fontWeight: 600, fontSize: 13 }}>{en.name}</div>
                     <div style={{ fontSize: 11, color: 'var(--gray)', marginTop: 1 }}>{en.role}</div>
                   </div>
                 </div>
                 <span style={{
-                  fontSize: 9, color: 'var(--gray-d)', fontFamily: 'var(--mono)',
+                  fontSize: 9, color: 'var(--gray)', fontFamily: 'var(--mono)',
                   border: '1px solid var(--line)', padding: '2px 6px', borderRadius: 3, letterSpacing: '.08em',
                 }}>{en.kind}</span>
               </div>

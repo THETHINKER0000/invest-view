@@ -1,8 +1,10 @@
 [
-  { "t": "TSLA", "name": "Tesla", "sec": "EV / 로봇" },
-  { "t": "PLTR", "name": "Palantir", "sec": "AI / 데이터" },
-  { "t": "RKLB", "name": "Rocket Lab", "sec": "우주 / 발사체" },
-  { "t": "IONQ", "name": "IonQ", "sec": "양자컴퓨팅" },
-  { "t": "BMNR", "name": "Bitmine", "sec": "비트코인" },
-  { "t": "JOBY", "name": "Joby Aviation", "sec": "eVTOL" }
+  { "t": "TSLA", "name": "Tesla",         "sec": "EV / 로봇",       "domain": "tesla.com" },
+  { "t": "PLTR", "name": "Palantir",      "sec": "AI / 데이터",     "domain": "palantir.com" },
+  { "t": "NVDA", "name": "NVIDIA",        "sec": "반도체 / AI",     "domain": "nvidia.com" },
+  { "t": "COIN", "name": "Coinbase",      "sec": "크립토 거래소",   "domain": "coinbase.com" },
+  { "t": "RKLB", "name": "Rocket Lab",    "sec": "우주 / 발사체",   "domain": "rocketlabusa.com" },
+  { "t": "IONQ", "name": "IonQ",          "sec": "양자컴퓨팅",      "domain": "ionq.com" },
+  { "t": "BMNR", "name": "Bitmine",       "sec": "비트코인",        "domain": "bitminetech.io" },
+  { "t": "JOBY", "name": "Joby Aviation", "sec": "eVTOL",           "domain": "jobyaviation.com" }
 ]

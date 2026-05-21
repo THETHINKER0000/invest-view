@@ -11,9 +11,14 @@
   --white: #F4F4F5;
   --gray: #8A8A92;
   --gray-d: #55555C;
-  --up: #FFFFFF;
-  --down: #5E5E66;
-  --signal: #6CA0FF;
+  /* 등락 색상 — 한국식(상승=빨강 / 하락=파랑) */
+  --up: #F0473E;
+  --up-dim: rgba(240,71,62,.12);
+  --up-bd:  rgba(240,71,62,.32);
+  --down: #3E8BF0;
+  --down-dim: rgba(62,139,240,.12);
+  --down-bd:  rgba(62,139,240,.32);
+  --signal: #A78BFA;   /* UI 액센트(서사·라벨) — 가격용 빨강/파랑과 충돌 없는 보라 */
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'IBM Plex Sans', sans-serif;
 }
@@ -60,3 +65,9 @@ body::before {
 @keyframes pulse { 50% { opacity: .2; } }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 .fade-in { animation: fadeIn .2s ease; }
+
+/* Mobile */
+@media (max-width: 720px) {
+  body { font-size: 13px; }
+  .main { padding: 18px !important; }
+}
