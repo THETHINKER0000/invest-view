@@ -5,9 +5,6 @@ import type { StockData } from '../types';
 import { fmtPrice } from '../lib/format';
 import Chip from './Chip';
 
-const UP = '#F0473E';
-const DOWN = '#3E8BF0';
-
 interface Props {
   stock: StockData;
   active: boolean;
@@ -19,7 +16,7 @@ export default function StockCard({ stock, active, onSelect, onRemove }: Props) 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: stock.t });
 
   const up = stock.chg >= 0;
-  const color = up ? UP : DOWN;
+  const color = up ? 'var(--up)' : 'var(--down)';
 
   const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
@@ -104,15 +101,15 @@ export default function StockCard({ stock, active, onSelect, onRemove }: Props) 
           <AreaChart data={stock.sparkData}>
             <defs>
               <linearGradient id={`sg${stock.t}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={color} stopOpacity={0.28} />
-                <stop offset="100%" stopColor={color} stopOpacity={0} />
+                <stop offset="0%" stopColor={up ? '#F4F4F5' : '#5E5E66'} stopOpacity={0.22} />
+                <stop offset="100%" stopColor={up ? '#F4F4F5' : '#5E5E66'} stopOpacity={0} />
               </linearGradient>
             </defs>
             <Area
               type="monotone"
               dataKey="v"
-              stroke={color}
-              strokeWidth={1.5}
+              stroke={up ? '#F4F4F5' : '#55555C'}
+              strokeWidth={1.4}
               fill={`url(#sg${stock.t})`}
               dot={false}
               isAnimationActive={false}

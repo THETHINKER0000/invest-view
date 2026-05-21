@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 
-const UP = '#F0473E';
-
 export default function Header() {
   const [time, setTime] = useState(() => new Date().toLocaleTimeString('ko-KR'));
 
@@ -33,8 +31,8 @@ export default function Header() {
       </div>
       <div style={{ display: 'flex', gap: 26, fontSize: 11, color: 'var(--gray)', letterSpacing: '.04em' }}>
         <div>UPDATED <b style={{ color: 'var(--white)', fontFamily: 'var(--mono)', fontWeight: 500 }}>{time}</b></div>
-        <div>BTC <b style={{ color: UP, fontFamily: 'var(--mono)', fontWeight: 500 }}>$104,820</b></div>
-        <div>S&amp;P 500 <b style={{ color: UP, fontFamily: 'var(--mono)', fontWeight: 500 }}>+0.42%</b></div>
+        <div>BTC <b style={{ color: 'var(--white)', fontFamily: 'var(--mono)', fontWeight: 500 }}>$104,820</b></div>
+        <div>S&amp;P 500 <b style={{ color: 'var(--white)', fontFamily: 'var(--mono)', fontWeight: 500 }}>+0.42%</b></div>
       </div>
     </header>
   );
