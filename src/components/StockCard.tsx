@@ -101,15 +101,15 @@ export default function StockCard({ stock, active, onSelect, onRemove }: Props) 
           <AreaChart data={stock.sparkData}>
             <defs>
               <linearGradient id={`sg${stock.t}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={up ? '#F4F4F5' : '#5E5E66'} stopOpacity={0.22} />
-                <stop offset="100%" stopColor={up ? '#F4F4F5' : '#5E5E66'} stopOpacity={0} />
+                <stop offset="0%" stopColor={up ? '#F0473E' : '#3E8BF0'} stopOpacity={0.28} />
+                <stop offset="100%" stopColor={up ? '#F0473E' : '#3E8BF0'} stopOpacity={0} />
               </linearGradient>
             </defs>
             <Area
               type="monotone"
               dataKey="v"
-              stroke={up ? '#F4F4F5' : '#55555C'}
-              strokeWidth={1.4}
+              stroke={up ? '#F0473E' : '#3E8BF0'}
+              strokeWidth={1.5}
               fill={`url(#sg${stock.t})`}
               dot={false}
               isAnimationActive={false}

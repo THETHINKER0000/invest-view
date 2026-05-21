@@ -52,22 +52,22 @@ export default function NarrativePanel({ narrative }: Props) {
         <p style={{ fontSize: 12.5, color: 'var(--white)', lineHeight: 1.65 }}>{n.direction}</p>
       </div>
 
-      {/* 강세/약세 — B&W 단색, 컬러 틴트 없음 */}
+      {/* 강세(빨강)/약세(파랑) — 한국식 등락 색상으로 시각 구분 */}
       <div style={{ display: 'flex', gap: 9, marginTop: 12 }}>
         <div style={{
-          flex: 1, background: 'var(--bg-2)', border: '1px solid var(--line)',
+          flex: 1, background: 'var(--up-dim)', border: '1px solid var(--up-bd)',
           borderRadius: 6, padding: '9px 11px',
         }}>
-          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--white)' }}>
+          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--up)' }}>
             ▲ 강세 서사
           </div>
           <p style={{ fontSize: 11.5, color: 'var(--gray)', lineHeight: 1.55 }}>{n.bull}</p>
         </div>
         <div style={{
-          flex: 1, background: 'var(--bg-2)', border: '1px solid var(--line)',
+          flex: 1, background: 'var(--down-dim)', border: '1px solid var(--down-bd)',
           borderRadius: 6, padding: '9px 11px',
         }}>
-          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--gray)' }}>
+          <div style={{ fontSize: 9, letterSpacing: '.1em', textTransform: 'uppercase', marginBottom: 4, fontWeight: 600, color: 'var(--down)' }}>
             ▼ 약세 서사
           </div>
           <p style={{ fontSize: 11.5, color: 'var(--gray)', lineHeight: 1.55 }}>{n.bear}</p>

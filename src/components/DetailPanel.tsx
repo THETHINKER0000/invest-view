@@ -18,7 +18,7 @@ const NEWS_ITEMS = [
 export default function DetailPanel({ stock, narrative }: Props) {
   const chartData = generateDetailData(stock.t.charCodeAt(0));
   const up = stock.chg >= 0;
-  const upColor = up ? 'var(--white)' : 'var(--down)';
+  const upColor = up ? 'var(--up)' : 'var(--down)';
 
   return (
     <div style={{ background: 'var(--bg-1)', border: '1px solid var(--line)', borderRadius: 9, padding: 22 }}>
@@ -43,7 +43,7 @@ export default function DetailPanel({ stock, narrative }: Props) {
         {[
           { k: '현재가', v: fmtPrice(stock.price), col: 'var(--white)' },
           { k: '당일 등락', v: `${up ? '+' : ''}${stock.chg.toFixed(2)}%`, col: upColor },
-          { k: '52주 변동', v: '+62.4%', col: 'var(--white)' },
+          { k: '52주 변동', v: '+62.4%', col: 'var(--up)' },
           { k: '목표주가', v: `$${(stock.price * 1.12).toFixed(2)}`, col: 'var(--white)' },
           { k: '컨센서스', v: 'HOLD', col: 'var(--signal)' },
         ].map(({ k, v, col }) => (

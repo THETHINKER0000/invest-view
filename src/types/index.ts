@@ -37,8 +37,10 @@ export interface Entity {
   aum: string;
   positions: number | string;
   src: string;
-  domain?: string;
+  domain?: string | null;
   photo?: string | null;
+  /** FUND에 대해 매니저 얼굴 아바타를 표시할 때 사용할 seed */
+  managerSeed?: string | null;
   redirect?: string;
   holdings: Holding[];
 }

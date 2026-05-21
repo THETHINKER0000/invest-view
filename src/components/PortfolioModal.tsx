@@ -37,15 +37,33 @@ export default function PortfolioModal({ entity, onClose, onJump }: Props) {
           paddingBottom: 18, borderBottom: '1px solid var(--line)', marginBottom: 20,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 15 }}>
-            <Chip
-              size="xl"
-              kind={entity.kind === 'FUND' ? 'company' : 'person'}
-              name={entity.name}
-              domain={entity.domain}
-              photo={entity.photo}
-              seed={entity.name}
-              round={entity.kind === 'PERSON'}
-            />
+            {/* 펀드 로고 + 매니저 얼굴 뱃지 / 인물은 큰 캐릭터 */}
+            <div style={{ position: 'relative', flexShrink: 0 }}>
+              <Chip
+                size="xl"
+                kind={entity.kind === 'FUND' ? 'company' : 'person'}
+                name={entity.name}
+                domain={entity.domain ?? undefined}
+                photo={entity.photo}
+                seed={entity.name}
+                round={entity.kind === 'PERSON'}
+              />
+              {entity.kind === 'FUND' && entity.managerSeed && (
+                <div style={{
+                  position: 'absolute', bottom: -5, right: -5,
+                  borderRadius: '50%', border: '2px solid var(--bg-1)',
+                  background: 'var(--bg-1)',
+                }}>
+                  <Chip
+                    size="s"
+                    kind="person"
+                    name={entity.managerSeed}
+                    seed={entity.managerSeed}
+                    round
+                  />
+                </div>
+              )}
+            </div>
             <div>
               <h2 style={{ fontSize: 19, fontWeight: 600, letterSpacing: '.01em' }}>{entity.name}</h2>
               <div style={{ fontSize: 11, color: 'var(--gray)', marginTop: 3, fontFamily: 'var(--mono)' }}>{entity.role}</div>
@@ -167,8 +185,8 @@ export default function PortfolioModal({ entity, onClose, onJump }: Props) {
                         {h.chg && (
                           <div style={{
                             fontSize: 9, marginTop: 2,
-                            color: h.chg.includes('+') ? 'var(--white)'
-                              : h.chg.includes('-') ? 'var(--signal)'
+                            color: h.chg.includes('+') ? 'var(--up)'
+                              : h.chg.includes('-') ? 'var(--down)'
                               : 'var(--gray-d)',
                           }}>{h.chg}</div>
                         )}
