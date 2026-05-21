@@ -8,7 +8,11 @@ const MARKET_STRIP = [
   { label: 'GOLD',    value: '$3,318',   up: true },
 ];
 
-export default function Header() {
+interface Props {
+  onApiKey: () => void;
+}
+
+export default function Header({ onApiKey }: Props) {
   const [time, setTime] = useState(() => new Date().toLocaleTimeString('ko-KR'));
 
   useEffect(() => {
@@ -54,6 +58,17 @@ export default function Header() {
           <div style={{ fontSize: 10, color: 'var(--gray-d)', fontFamily: 'var(--mono)', letterSpacing: '.06em' }}>
             2026 Q1 · SEC 13F 기준
           </div>
+          <button
+            onClick={onApiKey}
+            style={{
+              fontSize: 9, fontFamily: 'var(--mono)', color: 'var(--gray)',
+              border: '1px solid var(--line)', borderRadius: 3,
+              padding: '1px 6px', background: 'none', cursor: 'pointer',
+              letterSpacing: '.08em',
+            }}
+          >
+            ⚙ API 키
+          </button>
         </div>
       </div>
 

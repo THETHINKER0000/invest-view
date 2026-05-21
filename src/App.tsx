@@ -9,7 +9,9 @@ import PortfolioModal from './components/PortfolioModal';
 import PrivateWatchlist from './components/PrivateWatchlist';
 import OutlookNotes from './components/OutlookNotes';
 import MarketPulse from './components/MarketPulse';
+import ApiKeyModal from './components/ApiKeyModal';
 import { useWatchlist } from './hooks/useWatchlist';
+import { getFinnhubKey } from './lib/finnhub';
 import narrativesJson from '../config/narratives.json';
 import entitiesJson from '../config/entities.json';
 import type { Entity, Narrative } from './types';
@@ -18,7 +20,9 @@ const narratives = narrativesJson as Record<string, Narrative>;
 const entities = entitiesJson as Entity[];
 
 export default function App() {
-  const { stocks, reorder, addStock, removeStock } = useWatchlist();
+  const [apiKey, setApiKey] = useState(() => getFinnhubKey());
+  const [showApiModal, setShowApiModal] = useState(false);
+  const { stocks, reorder, addStock, removeStock } = useWatchlist(apiKey);
   const [active, setActive] = useState<string>('TSLA');
   const [modalEntity, setModalEntity] = useState<Entity | null>(null);
 
@@ -34,7 +38,7 @@ export default function App() {
 
   return (
     <>
-      <Header />
+      <Header onApiKey={() => setShowApiModal(true)} />
       <main className="main" style={{ padding: '28px', maxWidth: 1340, margin: '0 auto' }}>
         <SectionLabel highlight="/ 실시간 지표" first>마켓 펄스</SectionLabel>
         <MarketPulse />
@@ -56,7 +60,7 @@ export default function App() {
         {selectedStock && (
           <>
             <SectionLabel highlight={`/ ${selectedStock.t}`}>종목 상세</SectionLabel>
-            <DetailPanel stock={selectedStock} narrative={narrative} />
+            <DetailPanel stock={selectedStock} narrative={narrative} apiKey={apiKey} />
           </>
         )}
 
@@ -78,6 +82,14 @@ export default function App() {
         INNOVATOR&rsquo;S DESK — 개인 참고용 대시보드. 투자 권유가 아니며 데이터 정확성을 보장하지 않습니다.<br />
         데이터 출처: FINNHUB · SEC EDGAR (13F / FORM 4 / 13D-G) · COINGECKO · 로고 CLEARBIT · 아바타 DICEBEAR
       </footer>
+
+      {showApiModal && (
+        <ApiKeyModal
+          currentKey={apiKey}
+          onSave={(newKey) => { setApiKey(newKey); setShowApiModal(false); }}
+          onClose={() => setShowApiModal(false)}
+        />
+      )}
 
       <PortfolioModal
         entity={modalEntity}
