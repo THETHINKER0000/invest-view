@@ -75,6 +75,7 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
     const controller = new AbortController();
     abortRef.current = controller;
 
+    setLiveData(null);
     setLoading(true);
 
     fetchCandles(symbol, period, apiKey).then((data) => {
