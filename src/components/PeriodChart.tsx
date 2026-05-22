@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer,
 } from 'recharts';
@@ -21,6 +21,42 @@ const PERIODS: { label: string; value: Period }[] = [
   { label: '1년', value: '1Y' },
   { label: '5년', value: '5Y' },
 ];
+
+// Points and daily-equivalent volatility per period
+const PERIOD_CONFIG: Record<Period, { points: number; dailyVol: number }> = {
+  '1D': { points: 7,  dailyVol: 0.008 },
+  '1W': { points: 7,  dailyVol: 0.012 },
+  '1M': { points: 30, dailyVol: 0.015 },
+  '3M': { points: 65, dailyVol: 0.015 },
+  '1Y': { points: 52, dailyVol: 0.022 },
+  '5Y': { points: 60, dailyVol: 0.040 },
+};
+
+function seededRandom(seed: number) {
+  let s = seed;
+  return () => {
+    s = (s * 1664525 + 1013904223) & 0x7fffffff;
+    return s / 0x7fffffff;
+  };
+}
+
+function generateSyntheticData(
+  period: Period,
+  currentPrice: number,
+  symbolSeed: number,
+): { t: number; v: number }[] {
+  const { points, dailyVol } = PERIOD_CONFIG[period];
+  const rng = seededRandom(symbolSeed + period.charCodeAt(0) * 31);
+
+  // Walk backwards from currentPrice
+  const values: number[] = [currentPrice];
+  for (let i = 1; i < points; i++) {
+    const drift = (rng() - 0.49) * dailyVol * currentPrice;
+    values.unshift(Math.max(values[0] - drift, currentPrice * 0.3));
+  }
+
+  return values.map((v, i) => ({ t: i, v }));
+}
 
 function formatTick(ts: number, period: Period): string {
   const d = new Date(ts);
@@ -58,11 +94,15 @@ interface ChartPoint {
   v: number;
 }
 
-export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, currentPrice }: Props) {
+export default function PeriodChart({ symbol, apiKey, currentPrice, up: upProp }: Props) {
   const [period, setPeriod] = useState<Period>('3M');
   const [liveData, setLiveData] = useState<ChartPoint[] | null>(null);
   const [loading, setLoading] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
+
+  const symbolSeed = useMemo(() =>
+    [...symbol].reduce((acc, c) => acc + c.charCodeAt(0), 0),
+  [symbol]);
 
   useEffect(() => {
     if (!apiKey) {
@@ -70,7 +110,6 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
       return;
     }
 
-    // Cancel previous request
     if (abortRef.current) abortRef.current.abort();
     const controller = new AbortController();
     abortRef.current = controller;
@@ -87,18 +126,18 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
     return () => { controller.abort(); };
   }, [symbol, period, apiKey]);
 
-  // Decide which data to render
   const hasLive = liveData !== null && liveData.length > 0;
+
+  // Real data if available, else period-aware synthetic data anchored to current price
   const chartData: ChartPoint[] = hasLive
     ? liveData
-    : dummyData.map((d, i) => ({ t: i, v: d.v }));
+    : generateSyntheticData(period, currentPrice, symbolSeed);
 
-  // Determine color based on first vs last price
   const startPrice = chartData.length > 0 ? chartData[0].v : currentPrice;
   const isUp = hasLive ? (currentPrice >= startPrice) : upProp;
   const strokeColor = isUp ? 'var(--up)' : 'var(--down)';
 
-  const gradientId = `grad-${symbol}`;
+  const gradientId = `grad-${symbol}-${period}`;
 
   return (
     <div style={{ position: 'relative' }}>
@@ -130,7 +169,7 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
         })}
       </div>
 
-      {/* Chart area — extra bottom room for X-axis labels */}
+      {/* Chart */}
       <div style={{
         height: 200, background: 'var(--bg)', borderRadius: 7,
         border: '1px solid var(--line)', padding: '10px 4px 0',
@@ -156,7 +195,6 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
                 <stop offset="95%" stopColor={strokeColor} stopOpacity={0.02} />
               </linearGradient>
             </defs>
-            {/* SVG 속성에는 CSS 변수 미지원 → 직접 hex 색상 사용 */}
             <XAxis
               dataKey="t"
               tickFormatter={(t) => hasLive ? formatTick(t as number, period) : ''}
@@ -196,16 +234,18 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
         </ResponsiveContainer>
       </div>
 
-      {/* No API key badge */}
-      {!apiKey && (
-        <div style={{
-          marginTop: 6, fontSize: 9, color: 'var(--gray-d)',
-          fontFamily: 'var(--mono)', letterSpacing: '.06em',
-          textAlign: 'right',
-        }}>
-          실시간 데이터 없음 · API 키 설정 필요
-        </div>
-      )}
+      {/* Status badge */}
+      <div style={{
+        marginTop: 6, fontSize: 9, color: 'var(--gray-d)',
+        fontFamily: 'var(--mono)', letterSpacing: '.06em',
+        textAlign: 'right',
+      }}>
+        {!apiKey
+          ? 'API 키 없음 · 시뮬레이션 데이터'
+          : hasLive
+            ? '실시간 차트 · Finnhub'
+            : '시뮬레이션 데이터 · 실제 현재가 기준'}
+      </div>
     </div>
   );
 }
