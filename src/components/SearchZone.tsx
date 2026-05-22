@@ -122,7 +122,7 @@ export default function SearchZone({ ownedTickers, onAdd, onOpenEntity }: Props)
                     <div style={{ fontSize: 11, color: 'var(--gray)', marginTop: 1 }}>{p.name} · {p.sec}</div>
                   </div>
                 </div>
-                <span style={{ fontSize: 10, color: 'var(--white)', fontFamily: 'var(--mono)', letterSpacing: '.06em' }}>
+                <span style={{ fontSize: 10, color: 'var(--signal)', fontFamily: 'var(--mono)', letterSpacing: '.06em' }}>
                   + 그리드에 추가
                 </span>
               </div>

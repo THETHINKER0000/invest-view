@@ -48,7 +48,12 @@ export default function Chip({ size, kind, name, domain, photo, seed, round }: P
   let src: string | null = null;
 
   if (kind === 'company') {
-    if (stage === 0 && domain) src = `https://logo.clearbit.com/${domain}`;
+    // 다중 로고 소스 체인: Clearbit → Google favicon → DuckDuckGo → 이니셜
+    if (domain) {
+      if (stage === 0) src = `https://logo.clearbit.com/${domain}`;
+      else if (stage === 1) src = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+      else if (stage === 2) src = `https://icons.duckduckgo.com/ip3/${domain}.ico`;
+    }
   } else {
     if (stage === 0 && photo) {
       src = photo;

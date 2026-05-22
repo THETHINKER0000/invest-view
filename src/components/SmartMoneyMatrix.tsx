@@ -4,8 +4,6 @@ import type { Entity } from '../types';
 import Chip from './Chip';
 
 const entities = entitiesJson as Entity[];
-const UP = '#F0473E';
-const DOWN = '#3E8BF0';
 
 interface Props {
   tickers: string[];
@@ -24,9 +22,9 @@ export default function SmartMoneyMatrix({ tickers, onPick }: Props) {
         <span style={{ display: 'flex', alignItems: 'center', gap: 7, fontSize: 10, color: 'var(--gray)', fontFamily: 'var(--mono)' }}>
           ◆ 기준일 {quarter} — SEC 13F는 분기 종료 후 최대 45일 시차 · 투자자 이름 클릭 시 포트폴리오 열람
         </span>
-        {/* 범례 */}
+        {/* 범례 — 상승(빨강) / 하락(파랑) */}
         <span style={{ display: 'flex', gap: 14 }}>
-          {[{ color: UP, label: '상승' }, { color: DOWN, label: '하락' }].map(({ color, label }) => (
+          {[{ color: '#F0473E', label: '상승' }, { color: '#3E8BF0', label: '하락' }].map(({ color, label }) => (
             <span key={label} style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 10, fontFamily: 'var(--mono)', color: 'var(--gray)' }}>
               <span style={{ width: 9, height: 9, borderRadius: 2, background: color, display: 'inline-block' }} />
               {label}
@@ -66,7 +64,7 @@ export default function SmartMoneyMatrix({ tickers, onPick }: Props) {
                   {tickers.map((c) => {
                     const v = (inv.rows as Record<string, string>)[c];
                     const color = v
-                      ? (v.includes('▲') ? UP : DOWN)
+                      ? (v.includes('▲') ? '#F0473E' : '#3E8BF0')
                       : '#2E2E33';
                     return (
                       <td key={c} style={{ ...tdStyle('right'), fontFamily: 'var(--mono)', color }}>
@@ -83,7 +81,7 @@ export default function SmartMoneyMatrix({ tickers, onPick }: Props) {
 
       <style>{`
         .matrix-row:hover { background: var(--bg-2); }
-        .inv-cell-td:hover { color: var(--white) !important; }
+        .inv-cell-td:hover { color: var(--signal) !important; }
         th, td { border-bottom: 1px solid var(--line); }
       `}</style>
     </>

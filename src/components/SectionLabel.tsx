@@ -13,7 +13,7 @@ export default function SectionLabel({ children, highlight, first }: Props) {
       fontFamily: 'var(--mono)',
     }}>
       {children}
-      {highlight && <span style={{ color: 'var(--white)' }}>{highlight}</span>}
+      {highlight && <span style={{ color: 'var(--signal)' }}>{highlight}</span>}
       <span style={{ flex: 1, height: 1, background: 'var(--line)' }} />
     </div>
   );

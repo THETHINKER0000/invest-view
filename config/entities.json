@@ -5,6 +5,7 @@
     "kind": "FUND",
     "domain": "ark-funds.com",
     "photo": null,
+    "managerSeed": "Cathie Wood",
     "role": "Cathie Wood · 운용사",
     "aum": "$16.8B",
     "positions": 165,
@@ -25,6 +26,7 @@
     "kind": "FUND",
     "domain": "berkshirehathaway.com",
     "photo": null,
+    "managerSeed": "Warren Buffett",
     "role": "Warren Buffett · 지주사",
     "aum": "$302B",
     "positions": 42,
@@ -44,6 +46,7 @@
     "kind": "FUND",
     "domain": "coatue.com",
     "photo": null,
+    "managerSeed": "Philippe Laffont",
     "role": "Philippe Laffont · 헤지펀드",
     "aum": "$24.1B",
     "positions": 78,
@@ -52,8 +55,9 @@
       { "t": "NVDA", "name": "NVIDIA",    "domain": "nvidia.com",  "pct": 11.4, "amt": "$2.75B", "chg": "+3.2%" },
       { "t": "META", "name": "Meta",      "domain": "meta.com",    "pct": 8.9,  "amt": "$2.14B", "chg": "+1.0%" },
       { "t": "PLTR", "name": "Palantir",  "domain": "palantir.com","pct": 6.1,  "amt": "$1.47B", "chg": "+4.5%" },
+      { "t": "COIN", "name": "Coinbase",  "domain": "coinbase.com","pct": 3.2,  "amt": "$771M",  "chg": "+7.1%" },
       { "t": "TEM",  "name": "Tempus AI", "domain": "tempus.com",  "pct": 4.7,  "amt": "$1.13B", "chg": "+12%" },
-      { "t": "기타", "name": "기타 74종목",                          "pct": 68.9, "amt": "$16.6B", "chg": "" }
+      { "t": "기타", "name": "기타 73종목",                          "pct": 65.7, "amt": "$15.8B", "chg": "" }
     ]
   },
   {
@@ -62,6 +66,7 @@
     "kind": "FUND",
     "domain": "tigerglobal.com",
     "photo": null,
+    "managerSeed": "Chase Coleman",
     "role": "Chase Coleman · 헤지펀드",
     "aum": "$18.4B",
     "positions": 54,
@@ -70,7 +75,8 @@
       { "t": "MSFT", "name": "Microsoft", "domain": "microsoft.com","pct": 9.2,  "amt": "$1.69B",  "chg": "+2.1%" },
       { "t": "NVDA", "name": "NVIDIA",    "domain": "nvidia.com",   "pct": 8.7,  "amt": "$1.60B",  "chg": "+5.3%" },
       { "t": "META", "name": "Meta",      "domain": "meta.com",     "pct": 7.4,  "amt": "$1.36B",  "chg": "+1.8%" },
-      { "t": "기타", "name": "기타 51종목",                            "pct": 74.7, "amt": "$13.75B", "chg": "" }
+      { "t": "COIN", "name": "Coinbase",  "domain": "coinbase.com", "pct": 2.8,  "amt": "$515M",   "chg": "+4.9%" },
+      { "t": "기타", "name": "기타 50종목",                            "pct": 71.9, "amt": "$13.23B", "chg": "" }
     ]
   },
   {
@@ -79,6 +85,7 @@
     "kind": "FUND",
     "domain": "bailliegifford.com",
     "photo": null,
+    "managerSeed": "James Anderson",
     "role": "스코틀랜드 장기 성장 운용사",
     "aum": "$21.3B",
     "positions": 89,
@@ -86,8 +93,86 @@
     "holdings": [
       { "t": "TSLA", "name": "Tesla",      "domain": "tesla.com",         "pct": 12.1, "amt": "$2.58B",  "chg": "-3.2%" },
       { "t": "AMZN", "name": "Amazon",     "domain": "amazon.com",        "pct": 8.4,  "amt": "$1.79B",  "chg": "+1.1%" },
+      { "t": "NVDA", "name": "NVIDIA",     "domain": "nvidia.com",        "pct": 4.1,  "amt": "$873M",   "chg": "+2.8%" },
       { "t": "RKLB", "name": "Rocket Lab", "domain": "rocketlabusa.com",  "pct": 5.6,  "amt": "$1.19B",  "chg": "+9.4%" },
-      { "t": "기타", "name": "기타 86종목",                                  "pct": 73.9, "amt": "$15.74B", "chg": "" }
+      { "t": "기타", "name": "기타 85종목",                                  "pct": 69.8, "amt": "$14.87B", "chg": "" }
+    ]
+  },
+  {
+    "id": "drucken",
+    "name": "Duquesne F.O.",
+    "kind": "FUND",
+    "domain": "duquesne.com",
+    "photo": null,
+    "managerSeed": "Stanley Druckenmiller",
+    "role": "Druckenmiller · 패밀리오피스",
+    "aum": "$4.5B",
+    "positions": 39,
+    "src": "13F",
+    "holdings": [
+      { "t": "NVDA", "name": "NVIDIA",    "domain": "nvidia.com",    "pct": 15.2, "amt": "$683M",  "chg": "+5.1%" },
+      { "t": "MSFT", "name": "Microsoft", "domain": "microsoft.com", "pct": 11.8, "amt": "$531M",  "chg": "+2.3%" },
+      { "t": "GOOGL","name": "Alphabet",  "domain": "abc.xyz",       "pct": 8.4,  "amt": "$378M",  "chg": "+1.6%" },
+      { "t": "META", "name": "Meta",      "domain": "meta.com",      "pct": 6.2,  "amt": "$279M",  "chg": "+3.2%" },
+      { "t": "TSLA", "name": "Tesla",     "domain": "tesla.com",     "pct": 3.4,  "amt": "$153M",  "chg": "-1.2%" },
+      { "t": "기타", "name": "기타 34종목",                             "pct": 55.0, "amt": "$2.48B", "chg": "" }
+    ]
+  },
+  {
+    "id": "tepper",
+    "name": "Appaloosa Mgmt",
+    "kind": "FUND",
+    "domain": "appaloosamanagement.com",
+    "photo": null,
+    "managerSeed": "David Tepper",
+    "role": "David Tepper · 헤지펀드",
+    "aum": "$6.8B",
+    "positions": 31,
+    "src": "13F",
+    "holdings": [
+      { "t": "META", "name": "Meta",      "domain": "meta.com",    "pct": 20.1, "amt": "$1.37B", "chg": "+4.2%" },
+      { "t": "NVDA", "name": "NVIDIA",    "domain": "nvidia.com",  "pct": 12.4, "amt": "$843M",  "chg": "+6.3%" },
+      { "t": "AMZN", "name": "Amazon",    "domain": "amazon.com",  "pct": 8.8,  "amt": "$598M",  "chg": "+1.8%" },
+      { "t": "PLTR", "name": "Palantir",  "domain": "palantir.com","pct": 5.6,  "amt": "$381M",  "chg": "+3.9%" },
+      { "t": "COIN", "name": "Coinbase",  "domain": "coinbase.com","pct": 4.1,  "amt": "$279M",  "chg": "+8.2%" },
+      { "t": "기타", "name": "기타 26종목",                           "pct": 49.0, "amt": "$3.33B", "chg": "" }
+    ]
+  },
+  {
+    "id": "ackman",
+    "name": "Pershing Square",
+    "kind": "FUND",
+    "domain": "pershingsquareholdings.com",
+    "photo": null,
+    "managerSeed": "Bill Ackman",
+    "role": "Bill Ackman · 행동주의 헤지펀드",
+    "aum": "$18.7B",
+    "positions": 9,
+    "src": "13F",
+    "holdings": [
+      { "t": "GOOGL","name": "Alphabet",          "domain": "abc.xyz",   "pct": 22.4, "amt": "$4.19B", "chg": "+2.1%" },
+      { "t": "HLT",  "name": "Hilton Worldwide",  "domain": "hilton.com","pct": 19.8, "amt": "$3.70B", "chg": "-0.4%" },
+      { "t": "QSR",  "name": "Restaurant Brands", "domain": "rbi.com",   "pct": 18.2, "amt": "$3.40B", "chg": "" },
+      { "t": "CP",   "name": "Canadian Pacific",  "domain": "cpr.ca",    "pct": 15.6, "amt": "$2.92B", "chg": "+1.3%" },
+      { "t": "기타", "name": "기타 5종목",                                  "pct": 24.0, "amt": "$4.49B", "chg": "" }
+    ]
+  },
+  {
+    "id": "naval",
+    "name": "Naval Ravikant",
+    "kind": "PERSON",
+    "domain": null,
+    "photo": null,
+    "role": "개인 · AngelList 공동창업 / 엔젤투자자",
+    "aum": "비공개",
+    "positions": "200+",
+    "src": "공개 발표 / 인터뷰",
+    "holdings": [
+      { "t": "ANGL",  "name": "AngelList (비공개 지분)",      "pct": 35.0, "amt": "비공개",        "chg": "공동창업" },
+      { "t": "TWTR",  "name": "Twitter (초기 엔젤)",          "domain": "x.com",          "pct": 10.0, "amt": "엑시트 완료", "chg": "엑시트" },
+      { "t": "UBER",  "name": "Uber (시드 투자)",             "domain": "uber.com",        "pct": 10.0, "amt": "엑시트 완료", "chg": "엑시트" },
+      { "t": "NOTIO", "name": "Notion (초기 투자)",           "domain": "notion.so",       "pct": 5.0,  "amt": "비공개",     "chg": "비상장" },
+      { "t": "기타",  "name": "Figma·Postmates 등 200+ 스타트업",                           "pct": 40.0, "amt": "비공개",     "chg": "비상장" }
     ]
   },
   {

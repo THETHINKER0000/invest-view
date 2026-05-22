@@ -10,6 +10,8 @@
       "rows": {
         "TSLA": "7.6%▼",
         "PLTR": "4.9%▼",
+        "NVDA": "",
+        "COIN": "6.2%▲",
         "RKLB": "3.8%▲",
         "IONQ": "2.1%▼",
         "BMNR": "",
@@ -24,6 +26,8 @@
       "rows": {
         "TSLA": "",
         "PLTR": "",
+        "NVDA": "",
+        "COIN": "",
         "RKLB": "",
         "IONQ": "",
         "BMNR": "",
@@ -38,6 +42,8 @@
       "rows": {
         "TSLA": "1.4%▲",
         "PLTR": "6.1%▲",
+        "NVDA": "11.4%▲",
+        "COIN": "3.2%▲",
         "RKLB": "",
         "IONQ": "1.1%▲",
         "BMNR": "",
@@ -52,6 +58,8 @@
       "rows": {
         "TSLA": "2.3%▼",
         "PLTR": "3.5%▲",
+        "NVDA": "8.7%▲",
+        "COIN": "2.8%▲",
         "RKLB": "1.9%▲",
         "IONQ": "",
         "BMNR": "",
@@ -66,10 +74,60 @@
       "rows": {
         "TSLA": "12.1%▼",
         "PLTR": "",
+        "NVDA": "4.1%▲",
+        "COIN": "",
         "RKLB": "5.6%▲",
         "IONQ": "2.8%▲",
         "BMNR": "",
         "JOBY": "3.1%▲"
+      }
+    },
+    {
+      "id": "drucken",
+      "name": "Duquesne F.O.",
+      "firm": "Druckenmiller",
+      "domain": "duquesne.com",
+      "rows": {
+        "TSLA": "3.4%▼",
+        "PLTR": "",
+        "NVDA": "15.2%▲",
+        "COIN": "2.1%▲",
+        "RKLB": "",
+        "IONQ": "",
+        "BMNR": "",
+        "JOBY": ""
+      }
+    },
+    {
+      "id": "tepper",
+      "name": "Appaloosa",
+      "firm": "David Tepper",
+      "domain": "appaloosamanagement.com",
+      "rows": {
+        "TSLA": "2.4%▲",
+        "PLTR": "5.6%▲",
+        "NVDA": "12.4%▲",
+        "COIN": "4.1%▲",
+        "RKLB": "",
+        "IONQ": "",
+        "BMNR": "",
+        "JOBY": ""
+      }
+    },
+    {
+      "id": "ackman",
+      "name": "Pershing Square",
+      "firm": "Bill Ackman",
+      "domain": "pershingsquareholdings.com",
+      "rows": {
+        "TSLA": "",
+        "PLTR": "",
+        "NVDA": "",
+        "COIN": "",
+        "RKLB": "",
+        "IONQ": "",
+        "BMNR": "",
+        "JOBY": ""
       }
     }
   ]
