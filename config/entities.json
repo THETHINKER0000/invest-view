@@ -158,6 +158,24 @@
     ]
   },
   {
+    "id": "naval",
+    "name": "Naval Ravikant",
+    "kind": "PERSON",
+    "domain": null,
+    "photo": null,
+    "role": "개인 · AngelList 공동창업 / 엔젤투자자",
+    "aum": "비공개",
+    "positions": "200+",
+    "src": "공개 발표 / 인터뷰",
+    "holdings": [
+      { "t": "ANGL",  "name": "AngelList (비공개 지분)",      "pct": 35.0, "amt": "비공개",        "chg": "공동창업" },
+      { "t": "TWTR",  "name": "Twitter (초기 엔젤)",          "domain": "x.com",          "pct": 10.0, "amt": "엑시트 완료", "chg": "엑시트" },
+      { "t": "UBER",  "name": "Uber (시드 투자)",             "domain": "uber.com",        "pct": 10.0, "amt": "엑시트 완료", "chg": "엑시트" },
+      { "t": "NOTIO", "name": "Notion (초기 투자)",           "domain": "notion.so",       "pct": 5.0,  "amt": "비공개",     "chg": "비상장" },
+      { "t": "기타",  "name": "Figma·Postmates 등 200+ 스타트업",                           "pct": 40.0, "amt": "비공개",     "chg": "비상장" }
+    ]
+  },
+  {
     "id": "musk",
     "name": "Elon Musk",
     "kind": "PERSON",
