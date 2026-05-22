@@ -14,7 +14,7 @@ interface Props {
 }
 
 const PERIODS: { label: string; value: Period }[] = [
-  { label: '1일', value: '1D' },
+  { label: '5일', value: '1D' },
   { label: '1주', value: '1W' },
   { label: '1개월', value: '1M' },
   { label: '3개월', value: '3M' },
@@ -129,10 +129,10 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
         })}
       </div>
 
-      {/* Chart area */}
+      {/* Chart area — extra bottom room for X-axis labels */}
       <div style={{
-        height: 160, background: 'var(--bg)', borderRadius: 7,
-        border: '1px solid var(--line)', padding: '8px 4px 4px',
+        height: 200, background: 'var(--bg)', borderRadius: 7,
+        border: '1px solid var(--line)', padding: '10px 4px 0',
         position: 'relative',
       }}>
         {loading && (
@@ -140,7 +140,7 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
             position: 'absolute', inset: 0, display: 'flex',
             alignItems: 'center', justifyContent: 'center',
             background: 'rgba(0,0,0,.45)', borderRadius: 7, zIndex: 2,
-            fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gray-d)',
+            fontFamily: 'var(--mono)', fontSize: 10, color: '#55555C',
             letterSpacing: '.08em',
           }}>
             불러오는 중...
@@ -148,23 +148,30 @@ export default function PeriodChart({ symbol, apiKey, dummyData, up: upProp, cur
         )}
 
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData} margin={{ top: 4, right: 4, bottom: 0, left: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 4, right: 8, bottom: 4, left: 8 }}>
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={strokeColor} stopOpacity={0.25} />
+                <stop offset="5%" stopColor={strokeColor} stopOpacity={0.28} />
                 <stop offset="95%" stopColor={strokeColor} stopOpacity={0.02} />
               </linearGradient>
             </defs>
+            {/* SVG 속성에는 CSS 변수 미지원 → 직접 hex 색상 사용 */}
             <XAxis
               dataKey="t"
-              tickFormatter={(t) => (hasLive ? formatTick(t as number, period) : '')}
-              tick={{ fontFamily: 'IBM Plex Mono', fontSize: 9, fill: 'var(--gray-d)' }}
-              axisLine={false}
+              tickFormatter={(t) => hasLive ? formatTick(t as number, period) : ''}
+              tick={{ fontFamily: 'IBM Plex Mono', fontSize: 9, fill: '#55555C' }}
+              axisLine={{ stroke: '#222226' }}
               tickLine={false}
               interval="preserveStartEnd"
+              height={28}
+              minTickGap={40}
             />
             <YAxis
-              hide
+              width={56}
+              tick={{ fontFamily: 'IBM Plex Mono', fontSize: 9, fill: '#55555C' }}
+              axisLine={false}
+              tickLine={false}
+              tickFormatter={(v) => `$${Number(v) >= 1000 ? (Number(v) / 1000).toFixed(1) + 'k' : Number(v).toFixed(0)}`}
               domain={['dataMin * 0.98', 'dataMax * 1.02']}
             />
             <Tooltip
