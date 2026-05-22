@@ -32,11 +32,11 @@ function buildStock(
   live?: { price: number; chg: number; high?: number; low?: number; open?: number; prevClose?: number },
 ): StockData {
   const p = live ?? getPrice(ticker.t);
-  return {
-    ...ticker,
-    ...p,
-    sparkData: generateSparkData(ticker.t.charCodeAt(0)),
-  };
+  const seed = ticker.t.charCodeAt(0);
+  const sparkData = live?.prevClose
+    ? generateSparkData(seed, 20, live.prevClose, live.price)
+    : generateSparkData(seed);
+  return { ...ticker, ...p, sparkData };
 }
 
 const LS_ORDER = 'desk:order';

@@ -7,12 +7,46 @@ export function fmtChg(chg: number) {
   return `${sign}${chg.toFixed(2)}%`;
 }
 
-export function generateSparkData(seed: number, length = 20): { v: number }[] {
+function lcg(seed: number) {
+  let s = (seed * 1664525 + 1013904223) & 0x7fffffff;
+  return () => {
+    s = (s * 1664525 + 1013904223) & 0x7fffffff;
+    return s / 0x7fffffff;
+  };
+}
+
+export function generateSparkData(
+  seed: number,
+  length = 20,
+  startPrice?: number,
+  endPrice?: number,
+): { v: number }[] {
+  const rng = lcg(seed);
+  const hasAnchors = startPrice !== undefined && endPrice !== undefined;
+
+  if (hasAnchors) {
+    // Realistic walk from prevClose → currentPrice with noise proportional to move
+    const spread = Math.abs(endPrice - startPrice);
+    const vol = Math.max(spread * 0.4, endPrice * 0.008);
+    const data: { v: number }[] = [];
+    let v = startPrice;
+    for (let i = 0; i < length; i++) {
+      const progress = i / (length - 1);
+      const target = startPrice + (endPrice - startPrice) * progress;
+      v = target + (rng() - 0.5) * vol * 2;
+      data.push({ v });
+    }
+    // Force last point to exact current price
+    data[data.length - 1] = { v: endPrice };
+    return data;
+  }
+
+  // Fallback: normalized random walk
   const data: { v: number }[] = [];
   let v = 50 + (seed % 30);
   for (let i = 0; i < length; i++) {
-    v += Math.sin(i / 2 + seed) * 4 + (Math.random() - 0.5) * 8;
-    v = Math.max(20, Math.min(90, v));
+    v += Math.sin(i / 2 + seed) * 4 + (rng() - 0.5) * 10;
+    v = Math.max(10, Math.min(95, v));
     data.push({ v });
   }
   return data;

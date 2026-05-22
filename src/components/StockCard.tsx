@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { AreaChart, Area, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, YAxis, ResponsiveContainer } from 'recharts';
 import type { StockData } from '../types';
 import { fmtPrice } from '../lib/format';
 import Chip from './Chip';
@@ -96,20 +96,21 @@ export default function StockCard({ stock, active, onSelect, onRemove }: Props) 
       </div>
 
       {/* 스파크라인 */}
-      <div style={{ marginTop: 7, height: 28 }}>
+      <div style={{ marginTop: 7, height: 36 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={stock.sparkData}>
+          <AreaChart data={stock.sparkData} margin={{ top: 3, right: 0, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id={`sg${stock.t}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={up ? '#F0473E' : '#3E8BF0'} stopOpacity={0.28} />
+                <stop offset="0%" stopColor={up ? '#F0473E' : '#3E8BF0'} stopOpacity={0.35} />
                 <stop offset="100%" stopColor={up ? '#F0473E' : '#3E8BF0'} stopOpacity={0} />
               </linearGradient>
             </defs>
+            <YAxis domain={['dataMin * 0.992', 'dataMax * 1.008']} hide />
             <Area
               type="monotone"
               dataKey="v"
               stroke={up ? '#F0473E' : '#3E8BF0'}
-              strokeWidth={1.5}
+              strokeWidth={1.6}
               fill={`url(#sg${stock.t})`}
               dot={false}
               isAnimationActive={false}
