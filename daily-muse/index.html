@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daily Muse — 매일의 영감</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="src/styles/main.css" />
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <span class="brand-mark">Daily&nbsp;Muse</span>
+      <span class="brand-sub">매일의 영감 · 창의력 저널</span>
+    </div>
+    <div class="masthead-meta">
+      <span class="streak" id="streak">연속 <em>0</em>일</span>
+      <span class="sep">·</span>
+      <select id="archive-select" class="archive-select" aria-label="아카이브 날짜"></select>
+      <span class="new-badge" id="new-badge" hidden>오늘 갱신</span>
+      <span id="date-display">— · — · —</span>
+      <button id="theme-toggle" class="ghost-btn" aria-label="테마 전환" title="테마 (t)">◐</button>
+    </div>
+  </div>
+  <nav class="group-nav" id="group-nav" aria-label="카테고리 그룹"></nav>
+</header>
+
+<main class="canvas">
+
+  <!-- 데일리 의식 -->
+  <section class="daily" id="daily-section" aria-label="오늘의 의식">
+    <div class="daily-grid">
+      <article class="daily-card daily-question">
+        <span class="eyebrow">오늘의 질문</span>
+        <p class="serif-lead" id="daily-question">…</p>
+      </article>
+      <article class="daily-card daily-collision">
+        <span class="eyebrow">오늘의 충돌</span>
+        <p class="collision-pair" id="collision-pair">… × …</p>
+        <p class="collision-task" id="collision-task">…</p>
+        <button class="ghost-btn small" id="reroll-collision" title="다시 섞기 (r)">다시 섞기 ↻</button>
+      </article>
+      <article class="daily-card daily-quote">
+        <span class="eyebrow">오늘의 사색</span>
+        <blockquote id="daily-quote">…</blockquote>
+        <cite id="daily-quote-source">—</cite>
+      </article>
+      <article class="daily-card daily-prompt">
+        <span class="eyebrow">5분 라이팅</span>
+        <p id="daily-prompt5">…</p>
+        <textarea id="scratch" class="scratch" placeholder="여기 바로 끄적여 보세요. 자동 저장됩니다."></textarea>
+      </article>
+    </div>
+  </section>
+
+  <!-- 개인화 키워드 -->
+  <div class="keyword-bar">
+    <span class="kw-label">작업 중 키워드</span>
+    <div class="keyword-list" id="keyword-list"></div>
+    <input id="keyword-input" class="kw-input" placeholder="+ 캠페인·브랜드 키워드 입력 후 Enter" />
+    <span class="kw-hint">카피 발상 시 이 맥락에 연결됩니다</span>
+  </div>
+
+  <!-- 툴바 -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="검색 — 카테고리, 키워드, 무드 태그…  ( / )" />
+    </div>
+    <div class="toolbar-right">
+      <button class="ghost-btn small" id="filter-unread" title="안 읽은 것만 (u)">● 안 읽음</button>
+      <button class="ghost-btn small" id="filter-saved" title="저장한 것만">✦ 저장</button>
+    </div>
+  </div>
+  <div class="mood-filter" id="mood-filter" aria-label="무드 태그 필터"></div>
+
+  <!-- 정독 모드 안내 -->
+  <div class="focus-bar" id="focus-bar" hidden>
+    <span>정독 모드</span>
+    <button class="ghost-btn small" id="clear-focus">전체로 돌아가기 ✕</button>
+  </div>
+
+  <!-- 카테고리 피드 -->
+  <section class="feed" id="feed" aria-live="polite"></section>
+  <div class="empty" id="empty-state" hidden>검색 결과가 없습니다.</div>
+</main>
+
+<!-- 스와이프 파일 -->
+<aside class="swipe-drawer" id="swipe-drawer" aria-label="스와이프 파일">
+  <div class="swipe-head">
+    <span>스와이프 파일 <em id="swipe-count">0</em></span>
+    <button class="ghost-btn small" id="swipe-close">✕</button>
+  </div>
+  <button class="digest-btn" id="digest-btn">✨ 이번 주 회고 카피로 엮기</button>
+  <div class="swipe-list" id="swipe-list"></div>
+  <p class="swipe-empty" id="swipe-empty">마음에 든 인사이트의 ✦ 를 눌러 모아두세요.</p>
+</aside>
+<button class="swipe-fab" id="swipe-fab" aria-label="스와이프 파일 열기" title="스와이프 (s)">✦ <span id="swipe-fab-count">0</span></button>
+
+<footer class="colophon">
+  <span>Daily Muse</span>
+  <span class="shortcuts-hint">단축키 · / 검색 · t 테마 · s 보관함 · r 섞기 · u 안읽음</span>
+  <span id="gen-stamp">seed edition</span>
+</footer>
+
+<script src="src/scripts/app.js"></script>
+</body>
+</html>

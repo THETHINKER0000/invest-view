@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "id": "creation",
+      "label": "창작",
+      "labelEn": "Creation",
+      "categories": ["advertising", "branding", "art", "music", "mv", "film", "fashion"]
+    },
+    {
+      "id": "thought",
+      "label": "사유",
+      "labelEn": "Thought",
+      "categories": ["philosophy", "religion", "mythology", "ideas"]
+    },
+    {
+      "id": "frontier",
+      "label": "기술·과학",
+      "labelEn": "Frontier",
+      "categories": ["tech", "ai", "robot", "space", "quantum", "physics", "bio", "innovation"]
+    },
+    {
+      "id": "capital",
+      "label": "자본",
+      "labelEn": "Capital",
+      "categories": ["economy", "venture", "startup", "blockchain"]
+    }
+  ],
+  "categories": {
+    "advertising": { "label": "광고", "labelEn": "Advertising" },
+    "branding":    { "label": "브랜딩", "labelEn": "Branding" },
+    "art":         { "label": "미술", "labelEn": "Art" },
+    "music":       { "label": "음악", "labelEn": "Music" },
+    "mv":          { "label": "뮤직비디오", "labelEn": "Music Video" },
+    "film":        { "label": "영화", "labelEn": "Film" },
+    "fashion":     { "label": "패션", "labelEn": "Fashion" },
+    "philosophy":  { "label": "철학", "labelEn": "Philosophy" },
+    "religion":    { "label": "종교", "labelEn": "Religion" },
+    "mythology":   { "label": "신화", "labelEn": "Mythology" },
+    "ideas":       { "label": "사상", "labelEn": "Ideas" },
+    "tech":        { "label": "테크", "labelEn": "Tech" },
+    "ai":          { "label": "AI", "labelEn": "AI" },
+    "robot":       { "label": "로봇", "labelEn": "Robotics" },
+    "space":       { "label": "우주", "labelEn": "Space" },
+    "quantum":     { "label": "양자역학", "labelEn": "Quantum" },
+    "physics":     { "label": "물리학", "labelEn": "Physics" },
+    "bio":         { "label": "바이오", "labelEn": "Bio" },
+    "innovation":  { "label": "혁신", "labelEn": "Innovation" },
+    "economy":     { "label": "경제", "labelEn": "Economy" },
+    "venture":     { "label": "벤처", "labelEn": "Venture" },
+    "startup":     { "label": "스타트업", "labelEn": "Startup" },
+    "blockchain":  { "label": "블록체인", "labelEn": "Blockchain" }
+  },
+  "moodTags": ["반전", "미니멀", "페이소스", "데이터드리븐", "유머", "초현실", "내러티브", "오브제", "침묵", "스케일"]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "daily-muse",
+  "version": "1.0.0",
+  "description": "광고 카피라이터를 위한 매일의 영감 저널 — AI가 카테고리별 인사이트/트렌드/영상을 자동 큐레이션",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "generate": "node scripts/generate.js",
+    "generate:dry": "node scripts/generate.js --dry",
+    "generate:personal": "node scripts/generate.js --keywords=보람그룹,SK이노베이션"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.1"
+  },
+  "devDependencies": {
+    "serve": "^14.2.3"
+  },
+  "license": "MIT"
+}
