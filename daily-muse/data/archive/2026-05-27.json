@@ -1,0 +1,216 @@
+{
+  "date": "2026-05-27",
+  "generatedAt": "2026-05-28T21:00:00.000Z",
+  "seed": true,
+  "daily": {
+    "question": "가장 흔한 단어 하나로, 아무도 안 쓴 문장을 만들 수 있을까?",
+    "collision": {
+      "a": "신화",
+      "b": "블록체인",
+      "task": "프로메테우스가 불 대신 분산 원장을 훔쳐왔다면, 그 첫 광고 카피는?"
+    },
+    "prompt5min": "당신이 오늘 마신 음료를 '사라지면 누군가 슬퍼할 존재'로 의인화해 30자 이내 헤드라인을 써보라.",
+    "quote": {
+      "text": "道可道 非常道 — 도를 도라고 부를 수 있다면, 그것은 영원한 도가 아니다.",
+      "source": "노자, 『도덕경』 1장"
+    }
+  },
+  "categories": {
+    "advertising": {
+      "label": "광고",
+      "labelEn": "Advertising",
+      "spark": "가장 좋은 광고는 광고처럼 보이지 않는다 — 그러나 가장 위험한 것도 그렇다.",
+      "insights": [
+        {
+          "title": "침묵을 파는 법",
+          "body": "여백과 정적이 메시지보다 강할 때가 있다. 다 말하지 않는 카피가 소비자의 머릿속에서 완성된다.",
+          "moodTags": [
+            "침묵",
+            "미니멀"
+          ]
+        },
+        {
+          "title": "프로덕트가 주인공일 필요는 없다",
+          "body": "제품을 숨길수록 브랜드가 커지는 역설. 무엇을 보여주지 않을지가 곧 전략이다.",
+          "moodTags": [
+            "반전"
+          ]
+        },
+        {
+          "title": "데이터로 농담하기",
+          "body": "통계는 차가운 사실이지만, 한 줄의 위트로 감싸면 가장 오래 기억되는 카피가 된다.",
+          "moodTags": [
+            "데이터드리븐",
+            "유머"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "title": "역대 칸 그랑프리 필름 모음",
+          "channel": "Cannes Lions",
+          "why": "올해 흐름을 한 호흡에 훑기 좋다.",
+          "searchQuery": "Cannes Lions Film Grand Prix 2026"
+        },
+        {
+          "title": "돌고래유괴단 메이킹",
+          "channel": "DGUDGU",
+          "why": "위트가 어디서 나오는지 props·연출 단위로 분해해준다.",
+          "searchQuery": "돌고래유괴단 광고 메이킹"
+        },
+        {
+          "title": "Apple 광고의 침묵 연출",
+          "channel": "Apple",
+          "why": "여백을 매출로 바꾸는 정석.",
+          "searchQuery": "Apple ad minimalism"
+        }
+      ]
+    },
+    "ai": {
+      "label": "AI",
+      "labelEn": "AI",
+      "spark": "AI가 카피를 쓰는 시대, 카피라이터의 일은 '쓰는 것'에서 '묻는 것'으로 옮겨간다.",
+      "insights": [
+        {
+          "title": "프롬프트는 새로운 브리프다",
+          "body": "좋은 질문이 좋은 결과를 만든다. 발주의 언어가 곧 창작의 언어가 된 시대.",
+          "moodTags": [
+            "내러티브"
+          ]
+        },
+        {
+          "title": "취향은 자동화되지 않는다",
+          "body": "생성은 흔해지고 큐레이션이 귀해진다. 무엇을 버릴지 아는 감각이 차별점이다.",
+          "moodTags": [
+            "미니멀"
+          ]
+        },
+        {
+          "title": "AI 슬롭의 미학적 반작용",
+          "body": "모두가 비슷해 보일수록, 의도적으로 거칠고 인간적인 결이 프리미엄이 된다.",
+          "moodTags": [
+            "반전"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "title": "생성형 AI와 크리에이티브의 미래",
+          "channel": "Vox",
+          "why": "큰 그림을 잡기 좋은 다큐 포맷.",
+          "searchQuery": "generative AI creativity future documentary"
+        },
+        {
+          "title": "AI 시대 디자이너의 역할",
+          "channel": "The Futur",
+          "why": "전략·디렉션 레벨의 생존법.",
+          "searchQuery": "The Futur AI designer role"
+        },
+        {
+          "title": "프롬프트 엔지니어링 기초",
+          "channel": "Anthropic",
+          "why": "발상을 결과로 옮기는 실전 문법.",
+          "searchQuery": "prompt engineering basics"
+        }
+      ]
+    },
+    "philosophy": {
+      "label": "철학",
+      "labelEn": "Philosophy",
+      "spark": "모든 카피는 작은 형이상학이다 — 무엇이 진짜인지에 대한 주장이니까.",
+      "insights": [
+        {
+          "title": "무(無)의 전략",
+          "body": "동양 사상의 비움은 브랜드의 절제와 통한다. 채우지 않음으로써 더 많이 말하는 법.",
+          "moodTags": [
+            "미니멀",
+            "침묵"
+          ]
+        },
+        {
+          "title": "이름 붙이기의 권력",
+          "body": "언어가 세계를 가른다는 통찰. 네이밍은 곧 인식의 경계를 긋는 행위다.",
+          "moodTags": [
+            "내러티브"
+          ]
+        },
+        {
+          "title": "역설을 견디는 카피",
+          "body": "둘 다 참인 모순을 품을 때 메시지에 깊이가 생긴다.",
+          "moodTags": [
+            "반전"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "title": "노자와 비움의 철학",
+          "channel": "철학유치원",
+          "why": "브랜드 영속성과 연결해 보기 좋다.",
+          "searchQuery": "노자 도덕경 비움 철학"
+        },
+        {
+          "title": "비트겐슈타인: 언어의 한계",
+          "channel": "School of Life",
+          "why": "카피의 본질을 묻게 한다.",
+          "searchQuery": "Wittgenstein language limits"
+        },
+        {
+          "title": "스토아 철학과 현대",
+          "channel": "Einzelgänger",
+          "why": "절제된 톤의 사유.",
+          "searchQuery": "stoicism modern life"
+        }
+      ]
+    },
+    "branding": {
+      "label": "브랜딩",
+      "labelEn": "Branding",
+      "spark": "브랜드는 약속이 아니라, 반복된 증명이다.",
+      "insights": [
+        {
+          "title": "무인양품의 '브랜드 없음'",
+          "body": "브랜드를 지움으로써 브랜드가 되는 역설. 철학이 곧 디자인 언어가 된 사례.",
+          "moodTags": [
+            "미니멀",
+            "반전"
+          ]
+        },
+        {
+          "title": "일관성이 곧 신뢰",
+          "body": "매번 같은 톤으로 나타나는 것만으로 브랜드는 신뢰를 적립한다.",
+          "moodTags": [
+            "내러티브"
+          ]
+        },
+        {
+          "title": "적(敵)을 정의하라",
+          "body": "강한 브랜드는 무엇에 반대하는지가 분명하다.",
+          "moodTags": [
+            "반전"
+          ]
+        }
+      ],
+      "videos": [
+        {
+          "title": "무인양품 디자인 철학",
+          "channel": "MUJI",
+          "why": "비움의 브랜딩 교과서.",
+          "searchQuery": "MUJI design philosophy Kenya Hara"
+        },
+        {
+          "title": "브랜드 아키타입 이론",
+          "channel": "Marketing Media",
+          "why": "캐릭터 기반 캠페인 설계에 유용.",
+          "searchQuery": "brand archetypes explained"
+        },
+        {
+          "title": "Patagonia의 안티마케팅",
+          "channel": "Patagonia",
+          "why": "적을 정의하는 브랜드의 힘.",
+          "searchQuery": "Patagonia don't buy this jacket"
+        }
+      ]
+    }
+  }
+}
